@@ -5,13 +5,24 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "turbo run dev"
+    "dev": "turbo run dev",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev --skip-generate",
+    "db:deploy": "prisma migrate deploy"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/multer": "^1.4.12",
     "turbo": "^2.4.4"
   },
-  "packageManager": "pnpm@10.0.0"
+  "prisma": {
+    "schema": "packages/database/prisma/schema.prisma"
+  },
+  "packageManager": "pnpm@10.0.0",
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.0",
+    "prisma": "^6.5.0"
+  }
 }

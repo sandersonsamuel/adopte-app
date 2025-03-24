@@ -7,5 +7,5 @@ interface props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const IconButton = ({ children, className, ...rest }: props) => {
-  return <button className={classNames('rounded-2xl bg-[#F7F7F8] h-[50px] min-w-[50px] flex items-center justify-center', className)} {...rest}>{children}</button>;
+  return <button className={classNames('rounded-2xl bg-[#F7F7F8] h-[50px] min-w-[50px] flex items-center justify-center cursor-pointer', className)} {...rest}>{children}</button>;
 };

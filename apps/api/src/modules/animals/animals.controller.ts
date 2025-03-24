@@ -16,6 +16,7 @@ import { AnimalsService } from './animals.service';
 import { UpdateAnimalDto } from './dto/update-animal.dto';
 import { PhotoDTO } from 'src/upload/dto/photo.dto';
 import { CreateAnimalDto } from './dto/create-animal.dto';
+import { PaginationQueryDTO } from 'src/common/dto/pagination-query.dto';
 
 @Controller('animals')
 export class AnimalsController {
@@ -44,8 +45,9 @@ export class AnimalsController {
   }
 
   @Get('/paginate')
-  findAll() {
-    return this.animalsService.findAll();
+  findAll(@Param() paginationQuery: PaginationQueryDTO) {
+    const { page, pageSize } = paginationQuery;
+    return this.animalsService.findAll(page, pageSize);
   }
 
   @Get(':id')

@@ -16,9 +16,10 @@ export class AnimalsService {
     });
   }
 
-  findAll() {
+  findAll(page: number, pageSize: number) {
     return this.prismaService.animals.findMany({
-      
+      skip: (page - 1) * pageSize,
+      take: pageSize,
     })
   }
 

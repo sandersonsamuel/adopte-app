@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AnimalsModule } from 'src/animals/animals.module';
-import { CategoriesModule } from 'src/categories/categories.module';
+import { AnimalsModule } from 'src/modules/animals/animals.module';
+import { CategoriesModule } from 'src/modules/categories/categories.module';
 
 @Module({
   imports: [

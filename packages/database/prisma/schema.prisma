@@ -47,7 +47,7 @@ model Animals {
   weight      Decimal
   age         AgeGroupNames
   description String
-  adopted     Boolean
+  adopted     Boolean?      @default(false)
   categoryId  String
   category    Categories    @relation(fields: [categoryId], references: [id])
 

@@ -11,6 +11,12 @@ async function bootstrap() {
     }),
   );
 
+  app.enableCors({
+    origin: process.env.CLIENT_URL,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    credentials: true,
+  });
+
   const config = new DocumentBuilder()
     .setTitle('Adopte.me')
     .setDescription('api for adopte.me, one app for adopte animals from IFMA Campus Caxias')

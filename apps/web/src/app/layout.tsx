@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryProvider } from "@/components/query-provider";
 
 const lexend = Lexend({
   variable: "--font-geist-sans",
@@ -17,12 +20,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
-      <body
-        className={`${lexend.className} antialiased`}
-      >
-        {children}
+      <body className={`${lexend.className} antialiased p-5`}>
+        <QueryProvider>
+          {children}
+          <Toaster />
+        </QueryProvider>
       </body>
     </html>
   );

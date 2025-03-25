@@ -2313,7 +2313,7 @@ export namespace Prisma {
     weight: Decimal
     age: $Enums.AgeGroupNames
     description: string
-    adopted: boolean
+    adopted: boolean | null
     categoryId: string
     deletedAt: Date | null
     createdAt: Date
@@ -2431,7 +2431,7 @@ export namespace Prisma {
       weight: Prisma.Decimal
       age: $Enums.AgeGroupNames
       description: string
-      adopted: boolean
+      adopted: boolean | null
       categoryId: string
       deletedAt: Date | null
       createdAt: Date
@@ -3521,7 +3521,7 @@ export namespace Prisma {
     weight?: DecimalFilter<"Animals"> | Decimal | DecimalJsLike | number | string
     age?: EnumAgeGroupNamesFilter<"Animals"> | $Enums.AgeGroupNames
     description?: StringFilter<"Animals"> | string
-    adopted?: BoolFilter<"Animals"> | boolean
+    adopted?: BoolNullableFilter<"Animals"> | boolean | null
     categoryId?: StringFilter<"Animals"> | string
     deletedAt?: DateTimeNullableFilter<"Animals"> | Date | string | null
     createdAt?: DateTimeFilter<"Animals"> | Date | string
@@ -3538,7 +3538,7 @@ export namespace Prisma {
     weight?: SortOrder
     age?: SortOrder
     description?: SortOrder
-    adopted?: SortOrder
+    adopted?: SortOrderInput | SortOrder
     categoryId?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -3558,7 +3558,7 @@ export namespace Prisma {
     weight?: DecimalFilter<"Animals"> | Decimal | DecimalJsLike | number | string
     age?: EnumAgeGroupNamesFilter<"Animals"> | $Enums.AgeGroupNames
     description?: StringFilter<"Animals"> | string
-    adopted?: BoolFilter<"Animals"> | boolean
+    adopted?: BoolNullableFilter<"Animals"> | boolean | null
     categoryId?: StringFilter<"Animals"> | string
     deletedAt?: DateTimeNullableFilter<"Animals"> | Date | string | null
     createdAt?: DateTimeFilter<"Animals"> | Date | string
@@ -3575,7 +3575,7 @@ export namespace Prisma {
     weight?: SortOrder
     age?: SortOrder
     description?: SortOrder
-    adopted?: SortOrder
+    adopted?: SortOrderInput | SortOrder
     categoryId?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -3599,7 +3599,7 @@ export namespace Prisma {
     weight?: DecimalWithAggregatesFilter<"Animals"> | Decimal | DecimalJsLike | number | string
     age?: EnumAgeGroupNamesWithAggregatesFilter<"Animals"> | $Enums.AgeGroupNames
     description?: StringWithAggregatesFilter<"Animals"> | string
-    adopted?: BoolWithAggregatesFilter<"Animals"> | boolean
+    adopted?: BoolNullableWithAggregatesFilter<"Animals"> | boolean | null
     categoryId?: StringWithAggregatesFilter<"Animals"> | string
     deletedAt?: DateTimeNullableWithAggregatesFilter<"Animals"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Animals"> | Date | string
@@ -3675,7 +3675,7 @@ export namespace Prisma {
     weight: Decimal | DecimalJsLike | number | string
     age: $Enums.AgeGroupNames
     description: string
-    adopted: boolean
+    adopted?: boolean | null
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3691,7 +3691,7 @@ export namespace Prisma {
     weight: Decimal | DecimalJsLike | number | string
     age: $Enums.AgeGroupNames
     description: string
-    adopted: boolean
+    adopted?: boolean | null
     categoryId: string
     deletedAt?: Date | string | null
     createdAt?: Date | string
@@ -3707,7 +3707,7 @@ export namespace Prisma {
     weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     age?: EnumAgeGroupNamesFieldUpdateOperationsInput | $Enums.AgeGroupNames
     description?: StringFieldUpdateOperationsInput | string
-    adopted?: BoolFieldUpdateOperationsInput | boolean
+    adopted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3723,7 +3723,7 @@ export namespace Prisma {
     weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     age?: EnumAgeGroupNamesFieldUpdateOperationsInput | $Enums.AgeGroupNames
     description?: StringFieldUpdateOperationsInput | string
-    adopted?: BoolFieldUpdateOperationsInput | boolean
+    adopted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     categoryId?: StringFieldUpdateOperationsInput | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3739,7 +3739,7 @@ export namespace Prisma {
     weight: Decimal | DecimalJsLike | number | string
     age: $Enums.AgeGroupNames
     description: string
-    adopted: boolean
+    adopted?: boolean | null
     categoryId: string
     deletedAt?: Date | string | null
     createdAt?: Date | string
@@ -3755,7 +3755,7 @@ export namespace Prisma {
     weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     age?: EnumAgeGroupNamesFieldUpdateOperationsInput | $Enums.AgeGroupNames
     description?: StringFieldUpdateOperationsInput | string
-    adopted?: BoolFieldUpdateOperationsInput | boolean
+    adopted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3770,7 +3770,7 @@ export namespace Prisma {
     weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     age?: EnumAgeGroupNamesFieldUpdateOperationsInput | $Enums.AgeGroupNames
     description?: StringFieldUpdateOperationsInput | string
-    adopted?: BoolFieldUpdateOperationsInput | boolean
+    adopted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     categoryId?: StringFieldUpdateOperationsInput | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3929,6 +3929,11 @@ export namespace Prisma {
     not?: NestedEnumAgeGroupNamesFilter<$PrismaModel> | $Enums.AgeGroupNames
   }
 
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type CategoriesScalarRelationFilter = {
     is?: CategoriesWhereInput
     isNot?: CategoriesWhereInput
@@ -4034,6 +4039,14 @@ export namespace Prisma {
     _max?: NestedEnumAgeGroupNamesFilter<$PrismaModel>
   }
 
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
   export type AnimalsCreateNestedManyWithoutCategoryInput = {
     create?: XOR<AnimalsCreateWithoutCategoryInput, AnimalsUncheckedCreateWithoutCategoryInput> | AnimalsCreateWithoutCategoryInput[] | AnimalsUncheckedCreateWithoutCategoryInput[]
     connectOrCreate?: AnimalsCreateOrConnectWithoutCategoryInput | AnimalsCreateOrConnectWithoutCategoryInput[]
@@ -4112,6 +4125,10 @@ export namespace Prisma {
 
   export type EnumAgeGroupNamesFieldUpdateOperationsInput = {
     set?: $Enums.AgeGroupNames
+  }
+
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
   }
 
   export type CategoriesUpdateOneRequiredWithoutAnimalsNestedInput = {
@@ -4255,6 +4272,11 @@ export namespace Prisma {
     not?: NestedEnumAgeGroupNamesFilter<$PrismaModel> | $Enums.AgeGroupNames
   }
 
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type NestedEnumSexsWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Sexs | EnumSexsFieldRefInput<$PrismaModel>
     in?: $Enums.Sexs[] | ListEnumSexsFieldRefInput<$PrismaModel>
@@ -4299,6 +4321,14 @@ export namespace Prisma {
     _max?: NestedEnumAgeGroupNamesFilter<$PrismaModel>
   }
 
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
   export type AnimalsCreateWithoutCategoryInput = {
     id?: string
     name: string
@@ -4308,7 +4338,7 @@ export namespace Prisma {
     weight: Decimal | DecimalJsLike | number | string
     age: $Enums.AgeGroupNames
     description: string
-    adopted: boolean
+    adopted?: boolean | null
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4323,7 +4353,7 @@ export namespace Prisma {
     weight: Decimal | DecimalJsLike | number | string
     age: $Enums.AgeGroupNames
     description: string
-    adopted: boolean
+    adopted?: boolean | null
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4367,7 +4397,7 @@ export namespace Prisma {
     weight?: DecimalFilter<"Animals"> | Decimal | DecimalJsLike | number | string
     age?: EnumAgeGroupNamesFilter<"Animals"> | $Enums.AgeGroupNames
     description?: StringFilter<"Animals"> | string
-    adopted?: BoolFilter<"Animals"> | boolean
+    adopted?: BoolNullableFilter<"Animals"> | boolean | null
     categoryId?: StringFilter<"Animals"> | string
     deletedAt?: DateTimeNullableFilter<"Animals"> | Date | string | null
     createdAt?: DateTimeFilter<"Animals"> | Date | string
@@ -4431,7 +4461,7 @@ export namespace Prisma {
     weight: Decimal | DecimalJsLike | number | string
     age: $Enums.AgeGroupNames
     description: string
-    adopted: boolean
+    adopted?: boolean | null
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4446,7 +4476,7 @@ export namespace Prisma {
     weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     age?: EnumAgeGroupNamesFieldUpdateOperationsInput | $Enums.AgeGroupNames
     description?: StringFieldUpdateOperationsInput | string
-    adopted?: BoolFieldUpdateOperationsInput | boolean
+    adopted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4461,7 +4491,7 @@ export namespace Prisma {
     weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     age?: EnumAgeGroupNamesFieldUpdateOperationsInput | $Enums.AgeGroupNames
     description?: StringFieldUpdateOperationsInput | string
-    adopted?: BoolFieldUpdateOperationsInput | boolean
+    adopted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4476,7 +4506,7 @@ export namespace Prisma {
     weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     age?: EnumAgeGroupNamesFieldUpdateOperationsInput | $Enums.AgeGroupNames
     description?: StringFieldUpdateOperationsInput | string
-    adopted?: BoolFieldUpdateOperationsInput | boolean
+    adopted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

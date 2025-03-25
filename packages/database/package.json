@@ -1,5 +1,5 @@
 {
-  "name": "database",
+  "name": "@adopte/db",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,8 +14,5 @@
   },
   "dependencies": {
     "@prisma/client": "^6.5.0"
-  },
-  "exports": {
-    ".": "./src/index.ts"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "api",
+  "name": "@adopte/api",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -29,7 +29,7 @@
     "@supabase/supabase-js": "^2.49.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
-    "database": "*",
+    "@adopte/db": "workspace:*",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },

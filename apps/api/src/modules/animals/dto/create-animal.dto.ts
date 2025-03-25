@@ -1,10 +1,12 @@
-import { $Enums, Prisma } from '@prisma/client';
-import { Decimal } from '@prisma/client/runtime/library';
+import { $Enums, Prisma } from '@adopte/db/generated/client';
+import { Decimal } from '@adopte/db/generated/client/runtime/library';
+import { Transform } from 'class-transformer';
 import {
   IsBoolean,
   IsDecimal,
   IsEnum,
   IsNotEmpty,
+  IsNumber,
   IsString,
 } from 'class-validator';
 
@@ -15,14 +17,11 @@ export class CreateAnimalDto
   @IsNotEmpty()
   name: string;
 
-  @IsBoolean()
-  @IsNotEmpty()
-  adopted: boolean;
-
   @IsEnum($Enums.AgeGroupNames)
   @IsNotEmpty()
   age: $Enums.AgeGroupNames;
 
+  @Transform(({ value }) => value === 'true')
   @IsBoolean()
   @IsNotEmpty()
   castred: boolean;
@@ -39,7 +38,8 @@ export class CreateAnimalDto
   @IsNotEmpty()
   sex: $Enums.Sexs;
 
-  @IsDecimal()
+  @Transform(({ value }) => parseFloat(value))
+  @IsNumber()
   @IsNotEmpty()
-  weight: Decimal;
+  weight: number;
 }

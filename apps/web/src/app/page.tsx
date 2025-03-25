@@ -3,24 +3,28 @@ import { HeaderIcons } from "@/components/header-icons";
 import { MoreInfos } from "@/components/more-infos";
 import { MoreTimeInAdoption } from "@/components/more-time-in-adoption";
 import { IconButton } from "@/components/ui/icon-button";
-import { LogIn, Search } from "lucide-react";
+import { LayoutDashboard, LogIn, Search } from "lucide-react";
 import Link from "next/link";
+import { createClientServer } from "@/lib/utils/supabase/server";
+import { MAIN_PAGES } from "@/contants/main-pages.contant";
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClientServer();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
-    <div className="p-5 flex flex-col gap-5">
-      <div className="text-lg flex justify-between items-center">
-        <HeaderIcons>
-          <IconButton>
-            <Search />
-          </IconButton>
-          <Link href="/login">
-            <IconButton>
-              <LogIn />
-            </IconButton>
-          </Link>
-        </HeaderIcons>
-      </div>
+    <div className="flex flex-col gap-5">
+      <HeaderIcons>
+        <IconButton>
+          <Search />
+        </IconButton>
+        <Link href={user ? MAIN_PAGES[0].href : "/login"}>
+          <IconButton>{user ? <LayoutDashboard /> : <LogIn />}</IconButton>
+        </Link>
+      </HeaderIcons>
       <MoreInfos />
       <CategoryContent />
       <MoreTimeInAdoption />

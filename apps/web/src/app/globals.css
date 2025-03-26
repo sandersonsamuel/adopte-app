@@ -1,11 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #03063A;
+  --color-primary: #03063a;
+  --color-blue-gradient: linear-gradient(180deg, #3298f4 0%, #62acef 100%);
 }
 
 @layer {
   .blue-gradient {
     @apply bg-gradient-to-t from-[#3298F4] to-[#62ACEF];
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }

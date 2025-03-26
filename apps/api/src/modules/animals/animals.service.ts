@@ -16,11 +16,29 @@ export class AnimalsService {
     });
   }
 
-  findAll(page: number, pageSize: number) {
+  findAll(page: number, pageSize: number, category?: string) {
+
+    if (category) {
+      return this.prismaService.animals.findMany({
+        where: {
+          category: {
+            name: category,
+            deletedAt: null,
+          },
+          deletedAt: null,
+        },
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+      });
+    }
+
     return this.prismaService.animals.findMany({
+      where: {
+        deletedAt: null,
+      },
       skip: (page - 1) * pageSize,
       take: pageSize,
-    })
+    });
   }
 
   findOne(id: number) {

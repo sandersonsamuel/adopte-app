@@ -28,7 +28,7 @@ enum AgeGroupNames {
 
 model Categories {
   id      String    @id @default(uuid())
-  name    String
+  name    String    @unique
   animals Animals[]
 
   deletedAt DateTime? @map("deleted_at")

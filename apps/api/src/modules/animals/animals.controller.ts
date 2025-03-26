@@ -7,16 +7,17 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { UploadService } from 'src/upload/upload.service';
+import { PhotoDTO } from 'src/modules/upload/dto/photo.dto';
+import { UploadService } from 'src/modules/upload/upload.service';
 import { AnimalsService } from './animals.service';
-import { UpdateAnimalDto } from './dto/update-animal.dto';
-import { PhotoDTO } from 'src/upload/dto/photo.dto';
+import { AnimalPaginateDto } from './dto/animal-paginate.dto';
 import { CreateAnimalDto } from './dto/create-animal.dto';
-import { PaginationQueryDTO } from 'src/common/dto/pagination-query.dto';
+import { UpdateAnimalDto } from './dto/update-animal.dto';
 
 @Controller('animals')
 export class AnimalsController {
@@ -31,9 +32,23 @@ export class AnimalsController {
     @UploadedFile() photo: PhotoDTO,
     @Body() animal: CreateAnimalDto,
   ) {
-    const photoUrl = await this.uploadService.uploadPhoto(
-      photo.originalname,
+    const photoName = photo.originalname
+      .toLowerCase()
+      .normalize('NFD') // Remove acentos (ex: "ã" → "a")
+      .replace(/[\u0300-\u036f]/g, '') // Remove marcas de acentuação
+      .replace(/\s+/g, '_') // Substitui espaços por "_"
+      .replace(/[^\w.-]/g, '') // Remove caracteres especiais, mantendo apenas letras, números, "_" e "."
+      .replace(/_{2,}/g, '_'); // Evita múltiplos underscores seguidos
+
+    const optimizedBuffer = await this.uploadService.compressToMaxSize(
       photo.buffer,
+      500,
+      photo.mimetype,
+    );
+
+    const photoUrl = await this.uploadService.uploadPhoto(
+      photoName,
+      optimizedBuffer,
       photo.mimetype,
     );
 
@@ -45,9 +60,9 @@ export class AnimalsController {
   }
 
   @Get('/paginate')
-  findAll(@Param() paginationQuery: PaginationQueryDTO) {
-    const { page, pageSize } = paginationQuery;
-    return this.animalsService.findAll(page, pageSize);
+  findAll(@Query() paginationQuery: AnimalPaginateDto) {
+    const { page, pageSize, category } = paginationQuery;
+    return this.animalsService.findAll(page, pageSize, category);
   }
 
   @Get(':id')

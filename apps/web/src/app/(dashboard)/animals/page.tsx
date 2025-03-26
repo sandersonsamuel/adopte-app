@@ -1,11 +1,14 @@
 import { CategoryContent } from "@/components/categories";
+import { getCategoriesQuery } from "@/api/queries/get-categories.query";
 import { HeaderIcons } from "@/components/header-icons";
 import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
 import { Home } from "lucide-react";
 import Link from "next/link";
 
-export default function Animals() {
+export default async function Animals() {
+  const categories = await getCategoriesQuery();
+
   return (
     <div className="flex flex-col gap-4">
       <HeaderIcons>
@@ -20,7 +23,7 @@ export default function Animals() {
         <Button>Adicionar um novo animal</Button>
       </Link>
 
-      <CategoryContent />
+      <CategoryContent categories={categories} />
     </div>
   );
 }

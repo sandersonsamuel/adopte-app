@@ -49,21 +49,19 @@ export default function Login() {
         <h3 className="text-2xl font-semibold">Login</h3>
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-          <Input type="email" placeholder="Email" {...register("email")} />
-          {errors.email && (
-            <span className="text-red-500 text-sm">{errors.email.message}</span>
-          )}
+          <Input
+            type="email"
+            placeholder="Email"
+            {...register("email")}
+            error={errors.email?.message}
+          />
 
           <Input
             type="password"
             placeholder="Senha"
             {...register("password")}
+            error={errors?.password?.message}
           />
-          {errors.password && (
-            <span className="text-red-500 text-sm">
-              {errors.password.message}
-            </span>
-          )}
 
           <Button type="submit">Entrar</Button>
 

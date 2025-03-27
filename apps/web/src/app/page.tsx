@@ -6,7 +6,7 @@ import { IconButton } from "@/components/ui/icon-button";
 import { LayoutDashboard, LogIn, Search } from "lucide-react";
 import Link from "next/link";
 import { createClientServer } from "@/lib/utils/supabase/server";
-import { MAIN_PAGES } from "@/contants/main-pages.contant";
+import { MAIN_PAGES } from "@/constants/main-pages.contant";
 import { getCategoriesQuery } from "@/api/queries/get-categories.query";
 import { AnimalsQueryParamsType } from "@/types/animals-query-params-type";
 

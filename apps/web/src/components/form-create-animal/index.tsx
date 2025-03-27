@@ -4,7 +4,7 @@ import { createAnimalMutation } from "@/api/mutations/create-animal.mutation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
-import { createAnimalSchema } from "@/schemas/create-animal";
+import { createAnimalSchema } from "@/schemas/create-animal.schema";
 import { AnimalFormData } from "@/types/animal-form-data.type";
 import { Category } from "@/types/category.type";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,7 +12,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Info } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { CheckBox } from "../ui/check-box";
+import { Checkbox } from "../ui/checkbox";
 import { InputFile } from "../ui/input-file";
 
 type Props = {
@@ -99,7 +99,7 @@ export function FormCreateAnimal({ categories }: Props) {
         error={errors?.sex?.message}
       />
 
-      <CheckBox
+      <Checkbox
         {...register("castred")}
         label="Castrado"
         error={errors?.castred?.message}

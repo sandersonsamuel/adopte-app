@@ -13,7 +13,7 @@ import { loginSchema } from "@/schemas/login.schema";
 import { signIn } from "@/actions/auth.action";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { MAIN_PAGES } from "@/contants/main-pages.contant";
+import { MAIN_PAGES } from "@/constants/main-pages.contant";
 
 export default function Login() {
   const router = useRouter();

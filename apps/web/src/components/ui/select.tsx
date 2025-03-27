@@ -2,15 +2,13 @@ import classNames from "classnames";
 import { ChevronDownIcon } from "lucide-react";
 
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
-  options: { value: string; label: string }[];
+  options: { value: string | undefined; label: string }[];
   error?: string;
-  label?: string;
 }
 
 export function Select({
   options,
   error,
-  label,
   className,
   ...props
 }: SelectProps) {
@@ -30,7 +28,7 @@ export function Select({
           {...props}
         >
           {options.map((option) => (
-            <option key={option.value} value={option.value}>
+            <option key={option.value ?? ""} value={option.value}>
               {option.label}
             </option>
           ))}

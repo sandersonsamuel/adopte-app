@@ -1,10 +1,9 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { IconButton } from "../ui/icon-button";
 import { Category } from "@/types/category.type";
-import { SlidersHorizontal } from "lucide-react";
-import classNames from "classnames";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { FilterModal } from "../filter-modal";
+import { IconButton } from "../ui/icon-button";
 
 type Props = {
   categories: Category[];
@@ -25,14 +24,13 @@ export const CategoryContent = ({ categories }: Props) => {
     <div className="flex flex-col gap-3">
       <h3 className="font-medium">Tipos de pet</h3>
       <div className="flex gap-3">
-        <IconButton className={classNames(searchParams.size > 1 && "blue-gradient text-white shadow-xl")}>
-          <SlidersHorizontal />
-        </IconButton>
+        <FilterModal searchParams={searchParams} categories={categories} />
         {categories.map((item) => (
           <IconButton
             key={item.id}
             className={`p-3 capitalize ${
-              searchParams.get("category") === item.name && searchParams.size === 1
+              searchParams.get("category") === item.name &&
+              searchParams.size === 1
                 ? "blue-gradient text-white shadow-xl"
                 : ""
             }`}

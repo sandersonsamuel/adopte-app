@@ -67,7 +67,7 @@ export class AnimalsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.animalsService.findOne(+id);
+    return this.animalsService.findOne(id);
   }
 
   @Patch(':id')

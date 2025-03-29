@@ -49,12 +49,7 @@ export const FilterModal = ({ searchParams, categories }: Props) => {
     })),
   ];
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<AnimalsQueryParamsType>({
+  const { register, handleSubmit, reset } = useForm<AnimalsQueryParamsType>({
     resolver: zodResolver(animalsQuerySchema),
     defaultValues: {
       sex: searchParams.get("sex") || "",
@@ -90,7 +85,9 @@ export const FilterModal = ({ searchParams, categories }: Props) => {
       <IconButton
         onClick={() => setOpen(true)}
         className={classNames(
-          searchParams.size > 1 && "blue-gradient text-white shadow-xl"
+          searchParams.size >= 1 && !searchParams.get("category")
+            ? "blue-gradient text-white shadow-xl"
+            : ""
         )}
       >
         <SlidersHorizontal />
@@ -100,6 +97,11 @@ export const FilterModal = ({ searchParams, categories }: Props) => {
         isOpen={open}
         onRequestClose={handleCloseModal}
         ariaHideApp={false}
+        style={{
+          overlay: {
+            zIndex: 99999,
+          },
+        }}
         className={
           "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute bg-white border border-gray-300 rounded-3xl p-4 w-[80%] min-h-[40%]"
         }
@@ -130,7 +132,9 @@ export const FilterModal = ({ searchParams, categories }: Props) => {
 
             <Input label="Nome" {...register("name")} />
 
-            <Button className="mt-2" type="submit">Filtrar</Button>
+            <Button className="mt-2" type="submit">
+              Filtrar
+            </Button>
           </form>
         </div>
       </Modal>

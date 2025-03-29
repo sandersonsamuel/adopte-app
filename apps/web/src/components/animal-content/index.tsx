@@ -1,5 +1,6 @@
 import { AnimalAgeTranslation, AnimalType } from "@/types/animal.type";
 import Image from "next/image";
+import Link from "next/link";
 
 type Props = {
   animal: AnimalType;
@@ -7,7 +8,10 @@ type Props = {
 
 export const AnimalContent = ({ animal }: Props) => {
   return (
-    <div className="relative">
+    <Link
+      href={`/animal/${animal.id}`}
+      className="relative w-[150px] flex flex-col items-center"
+    >
       <Image
         src={animal.photo}
         alt={animal.name}
@@ -22,13 +26,11 @@ export const AnimalContent = ({ animal }: Props) => {
           animal.sex === "MALE" ? "border-blue-300" : "border-pink-300"
         }`}
       >
-        <p className="text-white font-medium text-sm">
-          {animal.name}
-        </p>
+        <p className="text-white font-medium text-sm">{animal.name}</p>
         <p className="text-white font-medium text-sm">
           {AnimalAgeTranslation[animal.age]}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };

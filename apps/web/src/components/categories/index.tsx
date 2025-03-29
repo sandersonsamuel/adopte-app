@@ -1,29 +1,21 @@
 "use client";
 
+import { Category } from "@/types/category.type";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { FilterModal } from "../filter-modal";
 import { IconButton } from "../ui/icon-button";
 
-const data = [
-  {
-    id: 1,
-    name: "Gato",
-    slug: "cat"
-  },
-  {
-    id: 2,
-    name: "Cachorro",
-    slug: "dog"
-  }
-];
+type Props = {
+  categories: Category[];
+};
 
-export const CategoryContent = () => {
-
+export const CategoryContent = ({ categories }: Props) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const updateParam = (key: string, value: string) => {
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams();
     params.set(key, value);
     router.push(`${pathname}?${params.toString()}`);
   };
@@ -31,9 +23,19 @@ export const CategoryContent = () => {
   return (
     <div className="flex flex-col gap-3">
       <h3 className="font-medium">Tipos de pet</h3>
-      <div className="flex gap-5">
-        {data.map(item => (
-          <IconButton key={item.id} className={`p-3 ${searchParams.get("animal") === item.slug ? "blue-gradient text-white shadow-xl" : ""}`} onClick={() => updateParam("animal", item.slug)}>
+      <div className="flex gap-3">
+        <FilterModal searchParams={searchParams} categories={categories} />
+        {categories.map((item) => (
+          <IconButton
+            key={item.id}
+            className={`p-3 capitalize ${
+              searchParams.get("category") === item.name &&
+              searchParams.size === 1
+                ? "blue-gradient text-white shadow-xl"
+                : ""
+            }`}
+            onClick={() => updateParam("category", item.name)}
+          >
             {item.name}
           </IconButton>
         ))}

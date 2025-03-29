@@ -1,19 +1,28 @@
 import { CategoryContent } from "@/components/categories";
 import { HeaderIcons } from "@/components/header-icons";
 import { MoreInfos } from "@/components/more-infos";
-import { MoreTimeInAdoption } from "@/components/more-time-in-adoption";
+import { InAdoption } from "@/components/in-adoption";
 import { IconButton } from "@/components/ui/icon-button";
 import { LayoutDashboard, LogIn, Search } from "lucide-react";
 import Link from "next/link";
 import { createClientServer } from "@/lib/utils/supabase/server";
-import { MAIN_PAGES } from "@/contants/main-pages.contant";
+import { MAIN_PAGES } from "@/constants/main-pages.contant";
+import { getCategoriesQuery } from "@/api/queries/get-categories.query";
+import { AnimalsQueryParamsType } from "@/types/animals-query-params-type";
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<AnimalsQueryParamsType>;
+}) {
   const supabase = await createClientServer();
+  const params = await searchParams;
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  const categories = await getCategoriesQuery();
 
   return (
     <div className="flex flex-col gap-5">
@@ -26,8 +35,8 @@ export default async function Home() {
         </Link>
       </HeaderIcons>
       <MoreInfos />
-      <CategoryContent />
-      <MoreTimeInAdoption />
+      {categories && <CategoryContent categories={categories} />}
+      <InAdoption params={params} />
     </div>
   );
 }

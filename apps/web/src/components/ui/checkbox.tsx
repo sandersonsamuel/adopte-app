@@ -5,7 +5,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
 
-export const CheckBox = ({ label, error, ...props }: Props) => {
+export const Checkbox = ({ label, error, ...props }: Props) => {
   return (
     <label className="flex items-center">
       <input {...props} type="checkbox" className="mr-2" />

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { PrismaService } from 'src/lib/prisma/prisma.service';
@@ -7,12 +7,29 @@ import { PrismaService } from 'src/lib/prisma/prisma.service';
 export class CategoriesService {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(createCategoryDto: CreateCategoryDto) {
+  async create(createCategoryDto: CreateCategoryDto) {
+    const categoryIsAlreadyExists = await this.prisma.categories.findUnique({
+      where: {
+        name: createCategoryDto.name,
+        deletedAt: null,
+      },
+    });
 
+    if (categoryIsAlreadyExists) {
+      throw new HttpException('A Categoria já existe', 400);
+    }
+
+    return this.prisma.categories.create({
+      data: createCategoryDto,
+    });
   }
 
   findAll() {
-    return this.prisma.categories.findMany();
+    return this.prisma.categories.findMany({
+      where: {
+        deletedAt: null,
+      },
+    });
   }
 
   findOne(id: number) {

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateAnimalDto } from './dto/create-animal.dto';
 import { UpdateAnimalDto } from './dto/update-animal.dto';
 import { PrismaService } from 'src/lib/prisma/prisma.service';
@@ -16,15 +16,46 @@ export class AnimalsService {
     });
   }
 
-  findAll(page: number, pageSize: number) {
+  findAll(page: number, pageSize: number, category?: string) {
+    if (category) {
+      return this.prismaService.animals.findMany({
+        where: {
+          category: {
+            name: category,
+            deletedAt: null,
+          },
+          deletedAt: null,
+        },
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+      });
+    }
+
     return this.prismaService.animals.findMany({
+      where: {
+        deletedAt: null,
+      },
       skip: (page - 1) * pageSize,
       take: pageSize,
-    })
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} animal`;
+  async findOne(id: string) {
+    const animal = await this.prismaService.animals.findUnique({
+      where: {
+        id,
+        deletedAt: null,
+      },
+      include: {
+        category: true,
+      },
+    });
+
+    if (!animal) {
+      throw new HttpException('Animal não encontrado', HttpStatus.NOT_FOUND);
+    }
+
+    return animal;
   }
 
   update(id: number, updateAnimalDto: UpdateAnimalDto) {

@@ -13,7 +13,7 @@ import { loginSchema } from "@/schemas/login.schema";
 import { signIn } from "@/actions/auth.action";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { MAIN_PAGES } from "@/contants/main-pages.contant";
+import { MAIN_PAGES } from "@/constants/main-pages.contant";
 
 export default function Login() {
   const router = useRouter();
@@ -49,21 +49,19 @@ export default function Login() {
         <h3 className="text-2xl font-semibold">Login</h3>
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-          <Input type="email" placeholder="Email" {...register("email")} />
-          {errors.email && (
-            <span className="text-red-500 text-sm">{errors.email.message}</span>
-          )}
+          <Input
+            type="email"
+            placeholder="Email"
+            {...register("email")}
+            error={errors.email?.message}
+          />
 
           <Input
             type="password"
             placeholder="Senha"
             {...register("password")}
+            error={errors?.password?.message}
           />
-          {errors.password && (
-            <span className="text-red-500 text-sm">
-              {errors.password.message}
-            </span>
-          )}
 
           <Button type="submit">Entrar</Button>
 

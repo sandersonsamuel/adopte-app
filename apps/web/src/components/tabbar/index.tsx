@@ -1,6 +1,6 @@
 "use client";
 
-import { MAIN_PAGES } from "@/contants/main-pages.contant";
+import { MAIN_PAGES } from "@/constants/main-pages.contant";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IconButton } from "../ui/icon-button";

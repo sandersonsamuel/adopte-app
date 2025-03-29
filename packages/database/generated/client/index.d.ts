@@ -3477,15 +3477,15 @@ export namespace Prisma {
 
   export type CategoriesWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    name?: string
     AND?: CategoriesWhereInput | CategoriesWhereInput[]
     OR?: CategoriesWhereInput[]
     NOT?: CategoriesWhereInput | CategoriesWhereInput[]
-    name?: StringFilter<"Categories"> | string
     deletedAt?: DateTimeNullableFilter<"Categories"> | Date | string | null
     createdAt?: DateTimeFilter<"Categories"> | Date | string
     updatedAt?: DateTimeFilter<"Categories"> | Date | string
     animals?: AnimalsListRelationFilter
-  }, "id">
+  }, "id" | "name">
 
   export type CategoriesOrderByWithAggregationInput = {
     id?: SortOrder

@@ -1,11 +1,11 @@
 import { z } from "zod";
 
-enum Sexs {
+export enum Sexs {
   MALE = "MALE",
   FEMALE = "FEMALE",
 }
 
-enum AgeGroupNames {
+export enum AgeGroupNames {
   BABY = "BABY",
   YOUNG = "YOUNG",
   ADULT = "ADULT",

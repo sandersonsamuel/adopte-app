@@ -1,4 +1,4 @@
 export default function Categories() {
-  return <div>Categories</div>;
+  return <div className="p-5">Categories</div>;
 }
 

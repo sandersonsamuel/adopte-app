@@ -3,8 +3,14 @@
   "builds": [
     {
       "src": "/apps/web/package.json",
-      "use": "@vercel/next",
-      "outputDirectory": "out"
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/apps/web/package.json",
+      "dest": "/apps/web/package.json",
+      "outputDirectory": "build"
     }
   ]
 }

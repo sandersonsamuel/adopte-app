@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateAnimalDto } from './dto/create-animal.dto';
 import { UpdateAnimalDto } from './dto/update-animal.dto';
 import { PrismaService } from 'src/lib/prisma/prisma.service';
+import { AnimalPaginateDto } from './dto/animal-paginate.dto';
 
 @Injectable()
 export class AnimalsService {
@@ -16,7 +17,7 @@ export class AnimalsService {
     });
   }
 
-  findAll(page: number, pageSize: number, category?: string) {
+  findAll({ page, pageSize, category, sex, name, age }: AnimalPaginateDto) {
     if (category) {
       return this.prismaService.animals.findMany({
         where: {
@@ -25,6 +26,9 @@ export class AnimalsService {
             deletedAt: null,
           },
           deletedAt: null,
+          sex,
+          name,
+          age,
         },
         skip: (page - 1) * pageSize,
         take: pageSize,
@@ -34,6 +38,9 @@ export class AnimalsService {
     return this.prismaService.animals.findMany({
       where: {
         deletedAt: null,
+        sex,
+        name,
+        age,
       },
       skip: (page - 1) * pageSize,
       take: pageSize,

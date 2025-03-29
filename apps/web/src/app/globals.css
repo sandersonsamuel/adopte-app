@@ -2,13 +2,19 @@
 
 @theme {
   --color-primary: #03063a;
-  --color-blue-gradient: linear-gradient(180deg, #3298f4 0%, #62acef 100%);
+  --color-green-primary: #E0F3CA;
+  --color-orange-primary: #FFE9C2;
+  --color-blue-primary: #C2EBFF;
+  --color-green-secondary: #cadbb6;
+  --color-orange-secondary: #e8d3ae;
+  --color-blue-secondary: #b0d7eb;
 }
 
 @layer {
   .blue-gradient {
     @apply bg-gradient-to-t from-[#3298F4] to-[#62ACEF];
   }
+
 }
 
 .swiper {

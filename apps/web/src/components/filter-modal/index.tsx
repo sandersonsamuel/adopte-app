@@ -85,7 +85,8 @@ export const FilterModal = ({ searchParams, categories }: Props) => {
       <IconButton
         onClick={() => setOpen(true)}
         className={classNames(
-          searchParams.size >= 1 && !searchParams.get("category")
+          (searchParams.size > 1 && searchParams.get("category")) ||
+            (searchParams.size == 1 && !searchParams.get("category"))
             ? "blue-gradient text-white shadow-xl"
             : ""
         )}

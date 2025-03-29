@@ -23,7 +23,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${lexend.className} antialiased p-5 h-screen`}>
+      <body className={`${lexend.className} antialiased text-primary`}>
         <QueryProvider>
           {children}
           <Toaster />

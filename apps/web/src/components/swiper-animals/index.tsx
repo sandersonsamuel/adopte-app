@@ -3,12 +3,13 @@
 import { AnimalType } from "@/types/animal.type";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { AnimalContent } from "../animal-content";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { AnimalContent } from "../animal-content";
+import { AnimalImg } from "../animal-content/img";
 
 type Props = {
   animals: AnimalType[];
@@ -38,7 +39,9 @@ export const SwiperAnimals = ({ animals }: Props) => {
           key={animal.id}
         >
           <div className="flex justify-center items-center w-full">
-            <AnimalContent animal={animal} />
+            <AnimalContent animal={animal}>
+              <AnimalImg animal={animal} />
+            </AnimalContent>
           </div>
         </SwiperSlide>
       ))}

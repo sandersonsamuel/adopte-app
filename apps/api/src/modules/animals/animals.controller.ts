@@ -61,8 +61,7 @@ export class AnimalsController {
 
   @Get('/paginate')
   findAll(@Query() paginationQuery: AnimalPaginateDto) {
-    const { page, pageSize, category } = paginationQuery;
-    return this.animalsService.findAll(page, pageSize, category);
+    return this.animalsService.findAll(paginationQuery);
   }
 
   @Get(':id')

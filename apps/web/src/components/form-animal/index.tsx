@@ -4,7 +4,7 @@ import { createAnimalMutation } from "@/api/mutations/create-animal.mutation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
-import { createAnimalSchema } from "@/schemas/create-animal.schema";
+import { createAnimalSchema, Sexs } from "@/schemas/create-animal.schema";
 import { AnimalFormData } from "@/types/animal-form-data.type";
 import { Category } from "@/types/category.type";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,24 +14,43 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Checkbox } from "../ui/checkbox";
 import { InputFile } from "../ui/input-file";
+import { AnimalType } from "@/types/animal.type";
+import { updateAnimalMutation } from "@/api/mutations/update-animal.mutation";
 
 type Props = {
   categories: Category[];
+  animal?: AnimalType;
 };
 
-export function FormCreateAnimal({ categories }: Props) {
+export function FormCreateAnimal({ categories, animal }: Props) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<AnimalFormData>({
     resolver: zodResolver(createAnimalSchema),
+    defaultValues: {
+      name: animal?.name,
+      description: animal?.description,
+      sex: animal?.sex,
+      castred: animal?.castred,
+      weight: Number(animal?.weight),
+      age: animal?.age,
+      categoryId: animal?.categoryId,
+    },
   });
 
-  const { isPending, ...mutation } = useMutation({
+  const createAnimal = useMutation({
     mutationFn: createAnimalMutation,
     onSuccess: () => {
       toast.success("Animal criado com sucesso");
+    },
+  });
+
+  const updateAnimal = useMutation({
+    mutationFn: updateAnimalMutation,
+    onSuccess: () => {
+      toast.success("Animal atualizado com sucesso");
     },
   });
 
@@ -47,7 +66,11 @@ export function FormCreateAnimal({ categories }: Props) {
     formData.append("age", data.age);
     formData.append("categoryId", data.categoryId);
 
-    mutation.mutate(formData);
+    if (animal) {
+      updateAnimal.mutate({ formData, id: animal.id });
+    } else {
+      createAnimal.mutate(formData);
+    }
   };
 
   return (
@@ -55,7 +78,6 @@ export function FormCreateAnimal({ categories }: Props) {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-4 overflow-y-auto"
     >
-
       <Input
         {...register("name")}
         placeholder="Nome do animal"
@@ -79,7 +101,7 @@ export function FormCreateAnimal({ categories }: Props) {
             className="w-4 h-4 text-blue-500"
             onClick={() => {
               toast(
-                "Para que a imagem não seja cortada ela deve estar na proporção 4:3",
+                "Para que a imagem não seja cortada ela deve estar na proporção 4:3 (retrato)",
                 {
                   duration: 6000,
                 }
@@ -134,8 +156,12 @@ export function FormCreateAnimal({ categories }: Props) {
         error={errors?.categoryId?.message}
       />
 
-      <Button type="submit" className="w-full" disabled={isPending}>
-        {isPending ? "Criando..." : "Adicionar"}
+      <Button
+        type="submit"
+        className="w-full"
+        disabled={createAnimal.isPending}
+      >
+        {createAnimal.isPending ? "Criando..." : "Adicionar"}
       </Button>
     </form>
   );

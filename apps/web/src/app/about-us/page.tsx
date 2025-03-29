@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function AboutUs() {
   return (
-    <div>
+    <div className="p-5">
       <HeaderIcons>
         <Link href="/">
           <IconButton>

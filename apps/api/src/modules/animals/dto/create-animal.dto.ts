@@ -1,13 +1,11 @@
 import { $Enums, Prisma } from '@adopte/db/generated/client';
-import { Decimal } from '@adopte/db/generated/client/runtime/library';
 import { Transform } from 'class-transformer';
 import {
   IsBoolean,
-  IsDecimal,
   IsEnum,
   IsNotEmpty,
   IsNumber,
-  IsString,
+  IsString
 } from 'class-validator';
 
 export class CreateAnimalDto

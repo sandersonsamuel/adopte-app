@@ -12,11 +12,11 @@ export const InAdoption = async ({ params }: Props) => {
     <div className="flex flex-col gap-3">
       <h3>Para adoção</h3>
       {data && data.length > 0 ? (
-        <SwiperAnimals animals={data} />
+        <SwiperAnimals animals={data}/>
       ) : (
         <p>
-          Nenhum animal do tipo "<b className="capitalize">{params.category}</b>
-          " foi encontrado para doação
+          Nenhum animal foi encontrado para adoção, tente alterar os filtros de
+          busca
         </p>
       )}
     </div>

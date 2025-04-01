@@ -1,16 +1,5 @@
 import { z } from "zod";
-
-export enum Sexs {
-  MALE = "MALE",
-  FEMALE = "FEMALE",
-}
-
-export enum AgeGroupNames {
-  BABY = "BABY",
-  YOUNG = "YOUNG",
-  ADULT = "ADULT",
-  OLD = "OLD",
-}
+import { Sex, AnimalAge } from "@/types/animal.type";
 
 export const createAnimalSchema = z.object({
   name: z
@@ -36,7 +25,7 @@ export const createAnimalSchema = z.object({
     .refine((file) => !file || (!!file && file.type?.startsWith("image")), {
       message: "Apenas imagens são permitidas",
     }),
-  sex: z.nativeEnum(Sexs, {
+  sex: z.nativeEnum(Sex, {
     required_error: "Sexo é obrigatório",
   }),
   castred: z.boolean({
@@ -46,7 +35,7 @@ export const createAnimalSchema = z.object({
     required_error: "Peso é obrigatório",
     invalid_type_error: "Peso é obrigatório",
   }),
-  age: z.nativeEnum(AgeGroupNames, {
+  age: z.nativeEnum(AnimalAge, {
     required_error: "Idade é obrigatório",
   }),
   categoryId: z.string({

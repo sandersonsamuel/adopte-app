@@ -11,7 +11,9 @@ const AnimalPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const animal = await getAnimalByIdQuery(id);
 
-  const age = animalAge.find((age) => age.value === animal.age);
+  const age = animal?.age
+    ? animalAge.find((age) => age.value === animal.age)
+    : null;
 
   if (!animal) {
     return <div>Animal não encontrado</div>;
@@ -20,32 +22,33 @@ const AnimalPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   return (
     <div
       className={classNames(
-        "flex flex-col w-full h-full relative",
-        animal.sex === "MALE" ? "bg-blue-100" : "bg-pink-50"
+        "flex flex-col w-full min-h-screen md:flex-row md:gap-4 md:items-center md:justify-center"
       )}
     >
-      <Image
-        className="max-h-[350px] object-cover relative"
-        src={animal.photo}
-        alt={animal.name}
-        width={800}
-        height={800}
-      />
+      <div className="relative">
+        <Image
+          className="max-h-[400px] md:w-[450px] md:h-full md:rounded-2xl object-cover"
+          src={animal.photo}
+          alt={animal.name}
+          width={800}
+          height={800}
+        />
 
-      <div className="absolute top-0 right-0 mr-5 mt-5 flex flex-col gap-2">
-        <Link href="/">
-          <IconButton>
-            <Home />
-          </IconButton>
-        </Link>
-        <Link href={animal.photo} target="_blank">
-          <IconButton>
-            <ImageIcon />
-          </IconButton>
-        </Link>
+        <div className="absolute top-0 right-0 mr-5 mt-5 flex flex-col gap-2">
+          <Link href="/">
+            <IconButton>
+              <Home />
+            </IconButton>
+          </Link>
+          <Link href={animal.photo} target="_blank">
+            <IconButton>
+              <ImageIcon />
+            </IconButton>
+          </Link>
+        </div>
       </div>
 
-      <div className="w-full p-5 h-full rounded-t-3xl -mt-5 relative z-10 bg-white">
+      <div className="w-full p-5 md:p-0 h-full rounded-t-3xl md:rounded-t-none -mt-5 md:-mt-0 z-10 bg-white">
         <h1 className="text-2xl font-bold text-primary">{animal.name}</h1>
 
         <div className="mt-3 flex justify-between gap-2">

@@ -15,6 +15,13 @@
     @apply bg-gradient-to-t from-[#3298F4] to-[#62ACEF];
   }
 
+  .red-gradient {
+    @apply bg-gradient-to-t from-[#db4a4a] to-[#ee4242];
+  }
+}
+
+.ReactModal__Content {
+  @apply shadow-xl border-0
 }
 
 .swiper {

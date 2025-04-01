@@ -1,8 +1,7 @@
-import { FormCreateAnimal } from "@/components/form-animal";
+import { FormCreateAnimal } from "@/components/forms-animal/create";
 import { getCategoriesQuery } from "@/api/queries/get-categories.query";
 
 export default async function CreateAnimal() {
-
   const categories = await getCategoriesQuery();
 
   return (

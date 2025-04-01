@@ -1,14 +1,14 @@
-import { api } from "@/lib/utils/axios/server";
+import { api } from "@/lib/utils/axios/client";
+import { UpdateAnimalFormData } from "@/schemas/update-animal.schema";
 
 type UpdateAnimalMutationProps = {
-  formData: FormData;
+  animal: UpdateAnimalFormData;
   id: string;
 };
 
 export const updateAnimalMutation = async ({
-  formData,
+  animal,
   id,
 }: UpdateAnimalMutationProps) => {
-  const { data } = await api.put(`/animals/${id}`, formData);
-  return data;
+  return await api.put(`/animals/update/${id}`, animal);
 };

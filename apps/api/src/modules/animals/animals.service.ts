@@ -26,6 +26,7 @@ export class AnimalsService {
             deletedAt: null,
           },
           deletedAt: null,
+          adopted: false,
           sex,
           name,
           age,
@@ -38,6 +39,7 @@ export class AnimalsService {
     return this.prismaService.animals.findMany({
       where: {
         deletedAt: null,
+        adopted: false,
         sex,
         name,
         age,
@@ -52,6 +54,7 @@ export class AnimalsService {
       where: {
         id,
         deletedAt: null,
+        adopted: false,
       },
       include: {
         category: true,
@@ -65,11 +68,33 @@ export class AnimalsService {
     return animal;
   }
 
-  update(id: number, updateAnimalDto: UpdateAnimalDto) {
-    return `This action updates a #${id} animal`;
+  async update(id: string, updateAnimalDto: UpdateAnimalDto) {
+    await this.findOne(id);
+
+    return this.prismaService.animals.update({
+      where: {
+        id,
+        deletedAt: null,
+      },
+      data: updateAnimalDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} animal`;
+  async adopted(id: string) {
+    await this.findOne(id);
+
+    return this.prismaService.animals.update({
+      where: { id, deletedAt: null },
+      data: { adopted: true },
+    });
+  }
+
+  async remove(id: string) {
+    await this.findOne(id);
+
+    return this.prismaService.animals.update({
+      where: { id, deletedAt: null },
+      data: { deletedAt: new Date() },
+    });
   }
 }

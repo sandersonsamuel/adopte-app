@@ -20,10 +20,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
-    <html lang="en">
-      <body className={`${lexend.className} antialiased text-primary`}>
+    <html lang="pt-BR">
+      <body
+        className={`${lexend.className} antialiased text-primary flex flex-col items-center max-w-3xl mx-auto min-h-screen`}
+      >
         <QueryProvider>
           {children}
           <Toaster />

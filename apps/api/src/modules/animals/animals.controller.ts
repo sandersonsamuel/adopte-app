@@ -7,6 +7,7 @@ import {
   Param,
   Patch,
   Post,
+  Put,
   Query,
   UploadedFile,
   UseInterceptors,
@@ -32,6 +33,10 @@ export class AnimalsController {
     @UploadedFile() photo: PhotoDTO,
     @Body() animal: CreateAnimalDto,
   ) {
+    if (!photo) {
+      throw new HttpException('A imagem do animal é obrigatória', 400);
+    }
+
     const photoName = photo.originalname
       .toLowerCase()
       .normalize('NFD') // Remove acentos (ex: "ã" → "a")
@@ -60,22 +65,30 @@ export class AnimalsController {
   }
 
   @Get('/paginate')
-  findAll(@Query() paginationQuery: AnimalPaginateDto) {
+  async findAll(@Query() paginationQuery: AnimalPaginateDto) {
     return this.animalsService.findAll(paginationQuery);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.animalsService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAnimalDto: UpdateAnimalDto) {
-    return this.animalsService.update(+id, updateAnimalDto);
+  @Put('update/:id')
+  async update(
+    @Param('id') id: string,
+    @Body() updateAnimalDto: UpdateAnimalDto,
+  ) {
+    return this.animalsService.update(id, updateAnimalDto);
+  }
+
+  @Patch('adopted/:id')
+  async adopted(@Param('id') id: string) {
+    return this.animalsService.adopted(id);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.animalsService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return this.animalsService.remove(id);
   }
 }

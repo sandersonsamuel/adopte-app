@@ -24,19 +24,21 @@ export default async function Home({
 
   const categories = await getCategoriesQuery();
 
-  return (
-    <div className="flex flex-col gap-5 p-5">
-      <HeaderIcons>
-        <IconButton>
-          <Search />
-        </IconButton>
-        <Link href={user ? MAIN_PAGES[0].href : "/login"}>
-          <IconButton>{user ? <LayoutDashboard /> : <LogIn />}</IconButton>
-        </Link>
-      </HeaderIcons>
-      <MoreInfos />
-      {categories && <CategoryContent categories={categories} />}
-      <InAdoption params={params} />
-    </div>
-  );
+  if (categories) {
+    return (
+      <div className="flex flex-col gap-5 p-5 w-full">
+        <HeaderIcons>
+          <IconButton>
+            <Search />
+          </IconButton>
+          <Link href={user ? MAIN_PAGES[0].href : "/login"}>
+            <IconButton>{user ? <LayoutDashboard /> : <LogIn />}</IconButton>
+          </Link>
+        </HeaderIcons>
+        <MoreInfos />
+        {categories && <CategoryContent categories={categories} />}
+        <InAdoption params={params} />
+      </div>
+    );
+  }
 }

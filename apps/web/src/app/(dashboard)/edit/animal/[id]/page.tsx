@@ -1,6 +1,8 @@
 import { getAnimalByIdQuery } from "@/api/queries/get-animal-by-id.query";
-import { FormCreateAnimal } from "@/components/form-animal";
 import { getCategoriesQuery } from "@/api/queries/get-categories.query";
+import { FormUpdateAnimal } from "@/components/forms-animal/update";
+import { AnimalPhotoUpdate } from "@/components/animal-photo-update";
+
 export default async function EditAnimalPage({
   params,
 }: {
@@ -14,7 +16,8 @@ export default async function EditAnimalPage({
   return (
     <div className="p-5">
       <h1 className="text-2xl font-bold mb-4">Editar Pet</h1>
-      <FormCreateAnimal categories={categories} animal={animal} />
+      <AnimalPhotoUpdate animal={animal} />
+      <FormUpdateAnimal categories={categories} animal={animal} />
     </div>
   );
 }

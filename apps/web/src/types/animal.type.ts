@@ -14,12 +14,14 @@ export interface AnimalType {
   updatedAt: Date;
 }
 
-enum Sex {
+export type UpdateAnimalType = Partial<AnimalType>;
+
+export enum Sex {
   MALE = "MALE",
   FEMALE = "FEMALE",
 }
 
-enum AnimalAge {
+export enum AnimalAge {
   BABY = "BABY",
   YOUNG = "YOUNG",
   ADULT = "ADULT",

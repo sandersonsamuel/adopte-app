@@ -2,55 +2,40 @@
 
 import { createAnimalMutation } from "@/api/mutations/create-animal.mutation";
 import { Button } from "@/components/ui/button";
+import { InputFile } from "@/components/ui/input-file";
 import { Input } from "@/components/ui/input";
-import { Select } from "@/components/ui/select";
-import { createAnimalSchema, Sexs } from "@/schemas/create-animal.schema";
+import { createAnimalSchema } from "@/schemas/create-animal.schema";
 import { AnimalFormData } from "@/types/animal-form-data.type";
 import { Category } from "@/types/category.type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { Info } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { Checkbox } from "../ui/checkbox";
-import { InputFile } from "../ui/input-file";
-import { AnimalType } from "@/types/animal.type";
-import { updateAnimalMutation } from "@/api/mutations/update-animal.mutation";
+import { Select } from "@/components/ui/select";
+import { Info } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useRouter } from "next/navigation";
 
 type Props = {
   categories: Category[];
-  animal?: AnimalType;
 };
 
-export function FormCreateAnimal({ categories, animal }: Props) {
+export function FormCreateAnimal({ categories }: Props) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<AnimalFormData>({
     resolver: zodResolver(createAnimalSchema),
-    defaultValues: {
-      name: animal?.name,
-      description: animal?.description,
-      sex: animal?.sex,
-      castred: animal?.castred,
-      weight: Number(animal?.weight),
-      age: animal?.age,
-      categoryId: animal?.categoryId,
-    },
   });
 
-  const createAnimal = useMutation({
+  const router = useRouter();
+
+  const mutation = useMutation({
     mutationFn: createAnimalMutation,
     onSuccess: () => {
+      router.push("/animals");
       toast.success("Animal criado com sucesso");
-    },
-  });
-
-  const updateAnimal = useMutation({
-    mutationFn: updateAnimalMutation,
-    onSuccess: () => {
-      toast.success("Animal atualizado com sucesso");
     },
   });
 
@@ -66,11 +51,7 @@ export function FormCreateAnimal({ categories, animal }: Props) {
     formData.append("age", data.age);
     formData.append("categoryId", data.categoryId);
 
-    if (animal) {
-      updateAnimal.mutate({ formData, id: animal.id });
-    } else {
-      createAnimal.mutate(formData);
-    }
+    mutation.mutate(formData);
   };
 
   return (
@@ -156,12 +137,8 @@ export function FormCreateAnimal({ categories, animal }: Props) {
         error={errors?.categoryId?.message}
       />
 
-      <Button
-        type="submit"
-        className="w-full"
-        disabled={createAnimal.isPending}
-      >
-        {createAnimal.isPending ? "Criando..." : "Adicionar"}
+      <Button type="submit" className="w-full" disabled={mutation.isPending}>
+        {mutation.isPending ? "Criando..." : "Adicionar"}
       </Button>
     </form>
   );

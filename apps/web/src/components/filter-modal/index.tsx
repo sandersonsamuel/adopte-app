@@ -14,6 +14,7 @@ import { Button } from "../ui/button";
 import { IconButton } from "../ui/icon-button";
 import { Input } from "../ui/input";
 import { Select } from "../ui/select";
+import { MODAL_STYLE } from "@/constants/modal-style.constants";
 type Props = {
   searchParams: URLSearchParams;
   categories: Category[];
@@ -98,13 +99,9 @@ export const FilterModal = ({ searchParams, categories }: Props) => {
         isOpen={open}
         onRequestClose={handleCloseModal}
         ariaHideApp={false}
-        style={{
-          overlay: {
-            zIndex: 99999,
-          },
-        }}
+        style={MODAL_STYLE}
         className={
-          "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute bg-white border border-gray-300 rounded-3xl p-4 w-[80%] min-h-[40%]"
+          "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute bg-white border border-gray-300 rounded-3xl p-4 w-[80%] md:max-w-3xl min-h-[40%]"
         }
       >
         <div className="flex flex-col gap-3">

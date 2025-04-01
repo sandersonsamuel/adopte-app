@@ -3,20 +3,22 @@
 import { IconButton } from "@/components/ui/icon-button";
 import { useAuth } from "@/contexts/auth-context";
 import { AnimalAgeTranslation, AnimalType } from "@/types/animal.type";
-import { Settings2 } from "lucide-react";
+import { Bolt, Settings2 } from "lucide-react";
 import Image from "next/image";
 
 type Props = {
   animal?: AnimalType;
+  redirectToEdit?: boolean;
 };
 
-export const AnimalImg = ({ animal }: Props) => {
+export const AnimalImg = ({ animal, redirectToEdit = true }: Props) => {
   const { user } = useAuth();
 
   if (animal) {
     return (
       <div className="relative">
         <Image
+          priority
           src={animal.photo}
           alt={animal.name}
           width={720}
@@ -35,10 +37,10 @@ export const AnimalImg = ({ animal }: Props) => {
             {AnimalAgeTranslation[animal.age]}
           </p>
         </div>
-        {user && (
-          <div className="absolute bottom-4 right-4">
-            <IconButton className="rounded-lg shadow-2xl" size="small">
-              <Settings2 size={20} />
+        {user && redirectToEdit && (
+          <div className="absolute left-3 top-3">
+            <IconButton className="rounded-lg shadow-md" size="small">
+              <Bolt size={20} />
             </IconButton>
           </div>
         )}

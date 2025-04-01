@@ -13,7 +13,12 @@ export const getAnimalsQuery = async (params?: AnimalsQueryParamsType) => {
     });
   }
 
-  return await api.get<AnimalType[]>(
-    `/animals/paginate?${searchParams.toString()}`
-  );
+  try {
+    const { data } = await api.get<AnimalType[]>(
+      `/animals/paginate?${searchParams.toString()}`
+    );
+    return data;
+  } catch (error) {
+    console.log("Error fetching animals", error);
+  }
 };

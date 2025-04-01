@@ -6,13 +6,13 @@ type Props = {
   params: AnimalsQueryParamsType;
 };
 export const InAdoption = async ({ params }: Props) => {
-  const { data } = await getAnimalsQuery(params);
+  const animals = await getAnimalsQuery(params);
 
   return (
     <div className="flex flex-col gap-3">
       <h3>Para adoção</h3>
-      {data && data.length > 0 ? (
-        <SwiperAnimals animals={data}/>
+      {animals && animals.length > 0 ? (
+        <SwiperAnimals animals={animals} />
       ) : (
         <p>
           Nenhum animal foi encontrado para adoção, tente alterar os filtros de

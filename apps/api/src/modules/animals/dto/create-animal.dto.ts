@@ -19,7 +19,10 @@ export class CreateAnimalDto
   @IsNotEmpty()
   age: $Enums.AgeGroupNames;
 
-  @Transform(({ value }) => value === 'true')
+  @Transform(({ value }) => {
+    if (typeof value === 'boolean') return value;
+    return value === 'true';
+  })
   @IsBoolean()
   @IsNotEmpty()
   castred: boolean;

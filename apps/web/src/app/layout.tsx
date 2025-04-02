@@ -23,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
+        suppressHydrationWarning
         className={`${lexend.className} antialiased text-primary flex flex-col items-center max-w-3xl mx-auto min-h-screen`}
       >
         <QueryProvider>

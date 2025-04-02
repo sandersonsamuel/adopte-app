@@ -29,7 +29,7 @@ const AnimalPage = async ({ params }: { params: Promise<{ id: string }> }) => {
         <Image
           priority
           className="max-h-[400px] md:w-[450px] md:h-full md:rounded-2xl object-cover"
-          src={animal.photo}
+          src={`${animal.photo}?t=${animal.updatedAt}`}
           alt={animal.name}
           width={800}
           height={800}

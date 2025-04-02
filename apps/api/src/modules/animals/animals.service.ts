@@ -124,4 +124,13 @@ export class AnimalsService {
 
     return animal;
   }
+
+  async updatedAt(id: string) {
+    await this.findOne(id);
+
+    return this.prismaService.animals.update({
+      where: { id, deletedAt: null },
+      data: { updatedAt: new Date() },
+    });
+  }
 }

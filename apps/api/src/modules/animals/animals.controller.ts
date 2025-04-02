@@ -80,11 +80,9 @@ export class AnimalsController {
       photo.mimetype,
     );
 
-    return await this.uploadService.updatePhoto(
-      id,
-      optimizedBuffer,
-      photo.mimetype,
-    );
+    await this.uploadService.updatePhoto(id, optimizedBuffer, photo.mimetype);
+
+    return await this.animalsService.updatedAt(id);
   }
 
   @Get(':id')

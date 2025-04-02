@@ -49,8 +49,9 @@ export class UploadService {
 
     const { error } = await supabase.storage
       .from('animals')
-      .upload(name, buffer, {
+      .update(name, buffer, {
         contentType: mimetype,
+        cacheControl: '3600',
         upsert: true,
       });
 

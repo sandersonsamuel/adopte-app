@@ -3,7 +3,7 @@
 import { IconButton } from "@/components/ui/icon-button";
 import { useAuth } from "@/contexts/auth-context";
 import { AnimalAgeTranslation, AnimalType } from "@/types/animal.type";
-import { Bolt, Settings2 } from "lucide-react";
+import { Bolt } from "lucide-react";
 import Image from "next/image";
 
 type Props = {
@@ -19,10 +19,10 @@ export const AnimalImg = ({ animal, redirectToEdit = true }: Props) => {
       <div className="relative">
         <Image
           priority
-          src={animal.photo}
+          src={`${animal.photo}?t=${animal.updatedAt}`}
           alt={animal.name}
-          width={720}
-          height={960}
+          width={150}
+          height={197}
           className={`w-[150px] h-[197.33px] rounded-3xl border-4 ${
             animal.sex === "MALE" ? "border-blue-300" : "border-pink-300"
           }`}

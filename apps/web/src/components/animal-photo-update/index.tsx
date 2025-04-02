@@ -24,9 +24,10 @@ export const AnimalPhotoUpdate = ({ animal }: Props) => {
 
   const mutation = useMutation({
     mutationFn: updateAnimalPhotoMutation,
-    onSuccess: (data) => {
+    onSuccess: (data: AnimalType) => {
       toast.success("Foto atualizada com sucesso");
-      animal.photo = data
+      animal.photo = data.photo;
+      animal.updatedAt = data.updatedAt;
     },
   });
 
@@ -40,6 +41,9 @@ export const AnimalPhotoUpdate = ({ animal }: Props) => {
     <div className="flex justify-center items-center my-3 relative">
       <label htmlFor="photo" className="cursor-pointer">
         <AnimalImg animal={animal} redirectToEdit={false} />
+        <div className="absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2">
+          <Pencil className="size-7 text-white" />
+        </div>
       </label>
 
       <input
@@ -48,10 +52,6 @@ export const AnimalPhotoUpdate = ({ animal }: Props) => {
         id="photo"
         className="hidden"
       />
-
-      <div className="absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2">
-        <Pencil className="size-7 text-white" />
-      </div>
     </div>
   );
 };

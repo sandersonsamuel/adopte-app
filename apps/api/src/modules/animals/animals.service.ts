@@ -3,21 +3,31 @@ import { CreateAnimalDto } from './dto/create-animal.dto';
 import { UpdateAnimalDto } from './dto/update-animal.dto';
 import { PrismaService } from 'src/lib/prisma/prisma.service';
 import { AnimalPaginateDto } from './dto/animal-paginate.dto';
-
+import { UploadService } from '../upload/upload.service';
 @Injectable()
 export class AnimalsService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly uploadService: UploadService,
+  ) {}
 
-  async create(photoUrl: string, createAnimalDto: CreateAnimalDto) {
+  async create(createAnimalDto: CreateAnimalDto) {
     return await this.prismaService.animals.create({
       data: {
-        photo: photoUrl,
         ...createAnimalDto,
       },
     });
   }
 
-  findAll({ page, pageSize, category, sex, name, age }: AnimalPaginateDto) {
+  findAll({
+    page,
+    pageSize,
+    category,
+    sex,
+    name,
+    age,
+    adopted,
+  }: AnimalPaginateDto) {
     if (category) {
       return this.prismaService.animals.findMany({
         where: {
@@ -26,7 +36,7 @@ export class AnimalsService {
             deletedAt: null,
           },
           deletedAt: null,
-          adopted: false,
+          adopted: !!adopted,
           sex,
           name,
           age,
@@ -39,7 +49,7 @@ export class AnimalsService {
     return this.prismaService.animals.findMany({
       where: {
         deletedAt: null,
-        adopted: false,
+        adopted: !!adopted,
         sex,
         name,
         age,
@@ -80,21 +90,38 @@ export class AnimalsService {
     });
   }
 
-  async adopted(id: string) {
+  async updatePhoto(id: string, photo: string) {
     await this.findOne(id);
 
     return this.prismaService.animals.update({
       where: { id, deletedAt: null },
+      data: { photo },
+    });
+  }
+
+  async adopted(id: string) {
+    await this.findOne(id);
+
+    const animal = await this.prismaService.animals.update({
+      where: { id, deletedAt: null },
       data: { adopted: true },
     });
+
+    await this.uploadService.deletePhoto(animal.id);
+
+    return animal;
   }
 
   async remove(id: string) {
     await this.findOne(id);
 
-    return this.prismaService.animals.update({
+    const animal = await this.prismaService.animals.update({
       where: { id, deletedAt: null },
       data: { deletedAt: new Date() },
     });
+
+    await this.uploadService.deletePhoto(animal.id);
+
+    return animal;
   }
 }

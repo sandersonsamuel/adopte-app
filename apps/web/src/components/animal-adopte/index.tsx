@@ -11,7 +11,7 @@ type Props = {
   id: string;
 };
 
-export const AnimalAdopted = ({ id }: Props) => {
+export const AnimalAdopte = ({ id }: Props) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
@@ -44,7 +44,7 @@ export const AnimalAdopted = ({ id }: Props) => {
         onRequestClose={() => setOpen(false)}
         ariaHideApp={false}
         style={MODAL_STYLE}
-        className="bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] md:max-w-3xl rounded-3xl p-4 border border-gray-300"
+        className="bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] md:max-w-lg rounded-3xl p-4 border border-gray-300"
       >
         <div className="flex flex-col gap-2">
           <h2 className="text-xl font-bold">Confirmar adoção</h2>
@@ -53,13 +53,19 @@ export const AnimalAdopted = ({ id }: Props) => {
           </p>
           <div className="flex gap-2">
             <Button
+              size="sm"
               variant="outline"
               type="button"
               onClick={() => setOpen(false)}
             >
               Cancelar
             </Button>
-            <Button variant="default" type="button" onClick={handleAdopted}>
+            <Button
+              size="sm"
+              variant="default"
+              type="button"
+              onClick={handleAdopted}
+            >
               Adotar
             </Button>
           </div>

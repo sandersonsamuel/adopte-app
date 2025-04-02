@@ -27,6 +27,7 @@ const AnimalPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     >
       <div className="relative">
         <Image
+          priority
           className="max-h-[400px] md:w-[450px] md:h-full md:rounded-2xl object-cover"
           src={animal.photo}
           alt={animal.name}

@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import classNames from "classnames";
 import { SlidersHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Modal from "react-modal";
 import { Button } from "../ui/button";
@@ -53,10 +53,10 @@ export const FilterModal = ({ searchParams, categories }: Props) => {
   const { register, handleSubmit, reset } = useForm<AnimalsQueryParamsType>({
     resolver: zodResolver(animalsQuerySchema),
     defaultValues: {
-      sex: searchParams.get("sex") || "",
-      age: searchParams.get("age") || "",
-      category: searchParams.get("category") || "",
-      name: searchParams.get("name") || "",
+      sex: "",
+      age: "",
+      category: "",
+      name: "",
     },
   });
 
@@ -81,6 +81,15 @@ export const FilterModal = ({ searchParams, categories }: Props) => {
     reset();
   };
 
+  useEffect(() => {
+    reset({
+      sex: searchParams.get("sex") || "",
+      age: searchParams.get("age") || "",
+      category: searchParams.get("category") || "",
+      name: searchParams.get("name") || "",
+    });
+  }, [searchParams, reset]);
+
   return (
     <>
       <IconButton
@@ -101,7 +110,7 @@ export const FilterModal = ({ searchParams, categories }: Props) => {
         ariaHideApp={false}
         style={MODAL_STYLE}
         className={
-          "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute bg-white border border-gray-300 rounded-3xl p-4 w-[80%] md:max-w-3xl min-h-[40%]"
+          "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute bg-white border border-gray-300 rounded-3xl p-4 w-[85%] md:max-w-lg min-h-[40%]"
         }
       >
         <div className="flex flex-col gap-3">
@@ -130,7 +139,7 @@ export const FilterModal = ({ searchParams, categories }: Props) => {
 
             <Input label="Nome" {...register("name")} />
 
-            <Button className="mt-2" type="submit">
+            <Button size="sm" className="mt-2" type="submit">
               Filtrar
             </Button>
           </form>

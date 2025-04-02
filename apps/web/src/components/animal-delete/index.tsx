@@ -44,7 +44,7 @@ export const AnimalDelete = ({ id }: Props) => {
         onRequestClose={() => setOpen(false)}
         ariaHideApp={false}
         style={MODAL_STYLE}
-        className="bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] md:max-w-3xl rounded-3xl p-4 border border-gray-300"
+        className="bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] md:max-w-lg rounded-3xl p-4 border border-gray-300"
       >
         <div className="flex flex-col gap-2">
           <h2 className="text-xl font-bold">Deletar animal</h2>
@@ -60,7 +60,12 @@ export const AnimalDelete = ({ id }: Props) => {
             >
               Cancelar
             </Button>
-            <Button variant="destructive" type="button" onClick={handleDelete}>
+            <Button
+              size="sm"
+              variant="destructive"
+              type="button"
+              onClick={handleDelete}
+            >
               Deletar
             </Button>
           </div>

@@ -10,6 +10,7 @@ import {
   Put,
   Query,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -19,6 +20,7 @@ import { AnimalsService } from './animals.service';
 import { AnimalPaginateDto } from './dto/animal-paginate.dto';
 import { CreateAnimalDto } from './dto/create-animal.dto';
 import { UpdateAnimalDto } from './dto/update-animal.dto';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('animals')
 export class AnimalsController {
@@ -27,23 +29,23 @@ export class AnimalsController {
     private readonly uploadService: UploadService,
   ) {}
 
+  @Get('/paginate')
+  async findAll(@Query() paginationQuery: AnimalPaginateDto) {
+    return this.animalsService.findAll(paginationQuery);
+  }
+
+  @UseGuards(AuthGuard)
   @UseInterceptors(FileInterceptor('photo'))
   @Post('/create')
   async create(
     @UploadedFile() photo: PhotoDTO,
     @Body() animal: CreateAnimalDto,
   ) {
+    const newAnimal = await this.animalsService.create(animal);
+
     if (!photo) {
       throw new HttpException('A imagem do animal é obrigatória', 400);
     }
-
-    const photoName = photo.originalname
-      .toLowerCase()
-      .normalize('NFD') // Remove acentos (ex: "ã" → "a")
-      .replace(/[\u0300-\u036f]/g, '') // Remove marcas de acentuação
-      .replace(/\s+/g, '_') // Substitui espaços por "_"
-      .replace(/[^\w.-]/g, '') // Remove caracteres especiais, mantendo apenas letras, números, "_" e "."
-      .replace(/_{2,}/g, '_'); // Evita múltiplos underscores seguidos
 
     const optimizedBuffer = await this.uploadService.compressToMaxSize(
       photo.buffer,
@@ -52,7 +54,7 @@ export class AnimalsController {
     );
 
     const photoUrl = await this.uploadService.uploadPhoto(
-      photoName,
+      newAnimal.id,
       optimizedBuffer,
       photo.mimetype,
     );
@@ -61,12 +63,28 @@ export class AnimalsController {
       throw new HttpException('Error uploading photo', 500);
     }
 
-    return this.animalsService.create(photoUrl, animal);
+    return this.animalsService.updatePhoto(newAnimal.id, photoUrl);
   }
 
-  @Get('/paginate')
-  async findAll(@Query() paginationQuery: AnimalPaginateDto) {
-    return this.animalsService.findAll(paginationQuery);
+  @UseGuards(AuthGuard)
+  @UseInterceptors(FileInterceptor('photo'))
+  @Patch('update-photo/:id')
+  async updatePhoto(@UploadedFile() photo: PhotoDTO, @Param('id') id: string) {
+    if (!photo) {
+      throw new HttpException('A imagem do animal é obrigatória', 400);
+    }
+
+    const optimizedBuffer = await this.uploadService.compressToMaxSize(
+      photo.buffer,
+      500,
+      photo.mimetype,
+    );
+
+    return await this.uploadService.updatePhoto(
+      id,
+      optimizedBuffer,
+      photo.mimetype,
+    );
   }
 
   @Get(':id')
@@ -74,6 +92,7 @@ export class AnimalsController {
     return this.animalsService.findOne(id);
   }
 
+  @UseGuards(AuthGuard)
   @Put('update/:id')
   async update(
     @Param('id') id: string,
@@ -82,11 +101,13 @@ export class AnimalsController {
     return this.animalsService.update(id, updateAnimalDto);
   }
 
+  @UseGuards(AuthGuard)
   @Patch('adopted/:id')
   async adopted(@Param('id') id: string) {
     return this.animalsService.adopted(id);
   }
 
+  @UseGuards(AuthGuard)
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return this.animalsService.remove(id);

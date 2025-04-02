@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsEnum, IsOptional, IsString } from 'class-validator';
 import { PaginationQueryDTO } from 'src/common/dto/pagination-query.dto';
 import { $Enums } from '@adopte/db/generated/client';
+import { Transform } from 'class-transformer';
 
 export class AnimalPaginateDto extends PaginationQueryDTO {
   @ApiProperty({
@@ -39,4 +40,16 @@ export class AnimalPaginateDto extends PaginationQueryDTO {
   @IsOptional()
   @IsEnum($Enums.AgeGroupNames)
   age?: $Enums.AgeGroupNames;
+
+  @ApiProperty({
+    description: 'The adopted to filter the animals',
+    example: 'true',
+    required: false,
+  })
+  @Transform(({ value }) =>
+    typeof value === 'string' ? value === 'true' : value,
+  )
+  @IsOptional()
+  @IsBoolean()
+  adopted?: boolean;
 }

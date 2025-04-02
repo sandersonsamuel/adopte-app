@@ -32,6 +32,37 @@ export class UploadService {
     );
   }
 
+  async deletePhoto(name: string) {
+    const supabase = this.supabaseService.getClient();
+
+    const { error } = await supabase.storage.from('animals').remove([name]);
+
+    if (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async updatePhoto(name: string, buffer: Buffer, mimetype: string) {
+    const supabase = this.supabaseService.getClient();
+
+    await this.deletePhoto(name);
+
+    const { error } = await supabase.storage
+      .from('animals')
+      .upload(name, buffer, {
+        contentType: mimetype,
+        upsert: true,
+      });
+
+    if (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    const publicUrl = supabase.storage.from('animals').getPublicUrl(name);
+
+    return publicUrl.data.publicUrl;
+  }
+
   async compressToMaxSize(
     buffer: Buffer,
     maxSizeKB: number,

@@ -13,11 +13,13 @@ export default async function EditAnimalPage({
   const animal = await getAnimalByIdQuery(id);
   const categories = await getCategoriesQuery();
 
-  return (
-    <div className="p-5">
-      <h1 className="text-2xl font-bold mb-4">Editar Pet</h1>
-      <AnimalPhotoUpdate animal={animal} />
-      <FormUpdateAnimal categories={categories} animal={animal} />
-    </div>
-  );
+  if (animal) {
+    return (
+      <div className="p-5">
+        <h1 className="text-2xl font-bold mb-4">Editar Pet</h1>
+        <AnimalPhotoUpdate animal={animal} />
+        <FormUpdateAnimal categories={categories} animal={animal} />
+      </div>
+    );
+  }
 }

@@ -19,7 +19,7 @@ export class AnimalsService {
     });
   }
 
-  findAll({
+  async findAll({
     page,
     pageSize,
     category,
@@ -38,7 +38,10 @@ export class AnimalsService {
           deletedAt: null,
           adopted: !!adopted,
           sex,
-          name,
+          name: {
+            contains: name,
+            mode: 'insensitive',
+          },
           age,
         },
         skip: (page - 1) * pageSize,
@@ -51,7 +54,10 @@ export class AnimalsService {
         deletedAt: null,
         adopted: !!adopted,
         sex,
-        name,
+        name: {
+          contains: name,
+          mode: 'insensitive',
+        },
         age,
       },
       skip: (page - 1) * pageSize,

@@ -16,7 +16,7 @@ export const AnimalImg = ({ animal, redirectToEdit = true }: Props) => {
 
   if (animal) {
     return (
-      <div className="relative">
+      <div className="relative flex flex-col items-center justify-center">
         <Image
           priority
           src={`${animal.photo}?t=${animal.updatedAt}`}

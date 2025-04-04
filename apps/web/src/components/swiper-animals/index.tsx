@@ -17,6 +17,7 @@ type Props = {
 export const SwiperAnimals = ({ animals }: Props) => {
   return (
     <Swiper
+      className="w-full"
       modules={[Autoplay]}
       autoplay={{ delay: 2500, disableOnInteraction: false }}
       slidesPerView={1}

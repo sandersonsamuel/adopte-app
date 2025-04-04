@@ -3,8 +3,9 @@ import { AnimalsQueryParamsType } from "@/types/animals-query-params-type";
 import { SwiperAnimals } from "../swiper-animals";
 
 type Props = {
-  params: AnimalsQueryParamsType;
+  params?: AnimalsQueryParamsType;
 };
+
 export const InAdoption = async ({ params }: Props) => {
   const animals = await getAnimalsQuery(params);
 
@@ -14,7 +15,7 @@ export const InAdoption = async ({ params }: Props) => {
       {animals && animals.length > 0 ? (
         <SwiperAnimals animals={animals} />
       ) : (
-        <p>
+        <p className="min-h-[200px]">
           Nenhum animal foi encontrado para adoção, tente alterar os filtros de
           busca
         </p>

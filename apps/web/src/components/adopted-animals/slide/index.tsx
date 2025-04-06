@@ -12,10 +12,10 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 type Props = {
-  animals: AnimalType[];
+  adoptedAnimals: AnimalType[];
 };
 
-export const AdoptedAnimalsSlide = ({ animals }: Props) => {
+export const AdoptedAnimalsCarousel = ({ adoptedAnimals }: Props) => {
   return (
     <Swiper
       className="w-full"
@@ -36,7 +36,7 @@ export const AdoptedAnimalsSlide = ({ animals }: Props) => {
         },
       }}
     >
-      {animals.map((animal) => (
+      {adoptedAnimals.map((animal) => (
         <SwiperSlide
           key={animal.id}
           className="flex justify-center items-center"

@@ -2,7 +2,7 @@
 
 import { AnimalType } from "@/types/animal.type";
 import { Pencil } from "lucide-react";
-import { AnimalImg } from "../animal-content/img";
+import { AnimalImg } from "../animal-link/img";
 import { useEffect, useState } from "react";
 import { updateAnimalPhotoMutation } from "@/api/mutations/update-animal-photo.mutation";
 import { toast } from "react-hot-toast";

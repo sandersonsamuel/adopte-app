@@ -1,19 +1,19 @@
 import { getAnimalsQuery } from "@/api/queries/get-animals.query";
 import { AnimalsQueryParamsType } from "@/types/animals-query-params-type";
-import { SwiperAnimals } from "../swiper-animals";
+import { AnimalCarousel } from "../animal-carousel";
 
 type Props = {
   params?: AnimalsQueryParamsType;
 };
 
-export const InAdoption = async ({ params }: Props) => {
+export const AnimalsForAdoption = async ({ params }: Props) => {
   const animals = await getAnimalsQuery(params);
 
   return (
     <div className="flex flex-col gap-3">
       <h3>Para adoção</h3>
       {animals && animals.length > 0 ? (
-        <SwiperAnimals animals={animals} />
+        <AnimalCarousel animals={animals} />
       ) : (
         <p className="min-h-[200px]">
           Nenhum animal foi encontrado para adoção, tente alterar os filtros de

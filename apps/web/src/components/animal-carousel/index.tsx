@@ -8,13 +8,13 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { AnimalContent } from "../animal-content";
-import { AnimalImg } from "../animal-content/img";
+import { AnimalLink } from "../animal-link";
+import { AnimalImg } from "../animal-link/img";
 
 type Props = {
   animals: AnimalType[];
 };
-export const SwiperAnimals = ({ animals }: Props) => {
+export const AnimalCarousel = ({ animals }: Props) => {
   return (
     <Swiper
       className="w-full"
@@ -40,9 +40,9 @@ export const SwiperAnimals = ({ animals }: Props) => {
           key={animal.id}
         >
           <div className="flex justify-center items-center w-full">
-            <AnimalContent animal={animal}>
+            <AnimalLink animal={animal}>
               <AnimalImg animal={animal} />
-            </AnimalContent>
+            </AnimalLink>
           </div>
         </SwiperSlide>
       ))}

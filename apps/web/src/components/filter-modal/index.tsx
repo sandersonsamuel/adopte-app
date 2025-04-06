@@ -81,6 +81,12 @@ export const FilterModal = ({ searchParams, categories }: Props) => {
     reset();
   };
 
+  const handleClearFilters = () => {
+    const params = new URLSearchParams();
+    router.push(`?${params.toString()}`);
+    handleCloseModal();
+  };
+
   useEffect(() => {
     reset({
       sex: searchParams.get("sex") || "",
@@ -139,9 +145,21 @@ export const FilterModal = ({ searchParams, categories }: Props) => {
 
             <Input label="Nome" {...register("name")} />
 
-            <Button size="sm" className="mt-2" type="submit">
-              Filtrar
-            </Button>
+            <div>
+              <Button size="sm" className="mt-2" type="submit">
+                Filtrar
+              </Button>
+
+              <Button
+                variant="outline"
+                size="sm"
+                className="mt-2"
+                type="button"
+                onClick={handleClearFilters}
+              >
+                Limpar
+              </Button>
+            </div>
           </form>
         </div>
       </Modal>

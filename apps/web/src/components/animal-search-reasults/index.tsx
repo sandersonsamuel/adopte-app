@@ -1,13 +1,13 @@
 import { getAnimalsQuery } from "@/api/queries/get-animals.query";
 import { AnimalsQueryParamsType } from "@/types/animals-query-params-type";
-import { AnimalImg } from "../animal-content/img";
+import { AnimalImg } from "../animal-link/img";
 import Link from "next/link";
 
 type Props = {
   params: AnimalsQueryParamsType;
 };
 
-export const SearchAnimalsContent = async ({ params }: Props) => {
+export const AnimalSearchResults = async ({ params }: Props) => {
   const animals = await getAnimalsQuery(params);
 
   if (animals && animals.length > 0) {

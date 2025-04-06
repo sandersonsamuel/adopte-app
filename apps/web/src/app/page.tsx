@@ -1,9 +1,9 @@
 import { getCategoriesQuery } from "@/api/queries/get-categories.query";
 import { AdoptedAnimals } from "@/components/adopted-animals";
-import { CategoryContent } from "@/components/categories";
+import { CategoryFilter } from "@/components/category-filter";
 import { HeaderIcons } from "@/components/header-icons";
-import { InAdoption } from "@/components/in-adoption";
-import { MoreInfos } from "@/components/more-infos";
+import { AnimalsForAdoption } from "@/components/animals-for-adoption";
+import { AdoptionProcessInfo } from "@/components/adoption-process-info";
 import { SearchInput } from "@/components/search-input";
 import { IconButton } from "@/components/ui/icon-button";
 import { MAIN_PAGES } from "@/constants/main-pages.contant";
@@ -35,9 +35,9 @@ export default async function Home({
             <IconButton>{user ? <LayoutDashboard /> : <LogIn />}</IconButton>
           </Link>
         </HeaderIcons>
-        <MoreInfos />
-        {categories && <CategoryContent categories={categories} />}
-        <InAdoption params={params} />
+        <AdoptionProcessInfo />
+        {categories && <CategoryFilter categories={categories} />}
+        <AnimalsForAdoption params={params} />
         <AdoptedAnimals />
       </div>
     );

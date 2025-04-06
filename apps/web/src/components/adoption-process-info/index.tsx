@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export const MoreInfos = () => {
+export const AdoptionProcessInfo = () => {
   return (
     <Link href="/about-us" className="w-full h-[140px] rounded-[25px] blue-gradient">
       <div className="bg-[url('/images/mask-group.png')] w-full h-full rounded-[25px]">

@@ -1,8 +1,8 @@
 "use client";
 
 import { updateAnimalMutation } from "@/api/mutations/update-animal.mutation";
-import { AnimalAdopte } from "@/components/animal-adopte";
-import { AnimalDelete } from "@/components/animal-delete";
+import { AnimalAdoptionModal } from "@/components/animal-adoption-modal";
+import { DeleteAnimalModal } from "@/components/delete-animal-modal";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
@@ -120,9 +120,9 @@ export function FormUpdateAnimal({ categories, animal }: Props) {
           {mutation.isPending ? "Atualizando..." : "Confirmar atualização"}
         </Button>
 
-        <AnimalAdopte id={animal.id} />
+        <AnimalAdoptionModal id={animal.id} />
 
-        <AnimalDelete id={animal.id} />
+        <DeleteAnimalModal id={animal.id} />
       </div>
     </form>
   );

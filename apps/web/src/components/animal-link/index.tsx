@@ -4,12 +4,12 @@ import { useAuth } from "@/contexts/auth-context";
 import { AnimalType } from "@/types/animal.type";
 import Link from "next/link";
 
-export type AnimalContentType = {
+export type AnimalLinkType = {
   animal: AnimalType;
   children: React.ReactNode;
 };
 
-export const AnimalContent = ({ animal, children }: AnimalContentType) => {
+export const AnimalLink = ({ animal, children }: AnimalLinkType) => {
   const { user } = useAuth();
 
   return (

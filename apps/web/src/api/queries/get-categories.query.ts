@@ -1,10 +1,5 @@
-import { api } from "@/lib/utils/axios/server";
+import { fetchApi } from "@/lib/utils/fetch-api/server";
 
 export const getCategoriesQuery = async () => {
-  try {
-    const { data } = await api.get("/categories/all");
-    return data;
-  } catch (error) {
-    console.log("Error fetching categories", error);
-  }
+  return fetchApi("/categories/all", "categories");
 };

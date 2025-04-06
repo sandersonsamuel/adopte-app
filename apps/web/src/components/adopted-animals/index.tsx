@@ -1,5 +1,5 @@
 import { getAdoptedAnimalsQuery } from "@/api/queries/get-adopted-animals.query";
-import { AdoptedAnimalsSlide } from "./slide";
+import { AdoptedAnimalsCarousel } from "./slide";
 export const AdoptedAnimals = async () => {
   const adoptedAnimals = await getAdoptedAnimalsQuery();
 
@@ -7,7 +7,7 @@ export const AdoptedAnimals = async () => {
     return (
       <div className="flex flex-col gap-3">
         <h3>Bixinhos que ganharam um lar</h3>
-        <AdoptedAnimalsSlide animals={adoptedAnimals} />
+        <AdoptedAnimalsCarousel adoptedAnimals={adoptedAnimals} />
       </div>
     );
   }

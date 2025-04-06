@@ -9,14 +9,19 @@ type Props = {
   categories: Category[];
 };
 
-export const CategoryContent = ({ categories }: Props) => {
+export const CategoryFilter = ({ categories }: Props) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
 
+  const name = searchParams.get("name");
+
   const updateParam = (key: string, value: string) => {
     const params = new URLSearchParams();
     params.set(key, value);
+    if (name) {
+      params.set("name", name);
+    }
     router.push(`${pathname}?${params.toString()}`);
   };
 

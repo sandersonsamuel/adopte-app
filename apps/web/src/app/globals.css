@@ -2,21 +2,25 @@
 
 @theme {
   --color-primary: #03063a;
-  --color-blue-gradient: linear-gradient(180deg, #3298f4 0%, #62acef 100%);
+  --color-green-primary: #e0f3ca;
+  --color-orange-primary: #ffe9c2;
+  --color-blue-primary: #c2ebff;
+  --color-green-secondary: #cadbb6;
+  --color-orange-secondary: #e8d3ae;
+  --color-blue-secondary: #b0d7eb;
+  --breakpoint-sm: 365px;
 }
 
 @layer {
   .blue-gradient {
     @apply bg-gradient-to-t from-[#3298F4] to-[#62ACEF];
   }
+
+  .red-gradient {
+    @apply bg-gradient-to-t from-[#db4a4a] to-[#ee4242];
+  }
 }
 
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-
-.swiper-slide img {
-  display: block;
-  object-fit: cover;
+.ReactModal__Content {
+  @apply shadow-xl border-0;
 }

@@ -2307,7 +2307,7 @@ export namespace Prisma {
   export type AnimalsGroupByOutputType = {
     id: string
     name: string
-    photo: string
+    photo: string | null
     sex: $Enums.Sexs
     castred: boolean
     weight: Decimal
@@ -2425,7 +2425,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
-      photo: string
+      photo: string | null
       sex: $Enums.Sexs
       castred: boolean
       weight: Prisma.Decimal
@@ -3515,7 +3515,7 @@ export namespace Prisma {
     NOT?: AnimalsWhereInput | AnimalsWhereInput[]
     id?: StringFilter<"Animals"> | string
     name?: StringFilter<"Animals"> | string
-    photo?: StringFilter<"Animals"> | string
+    photo?: StringNullableFilter<"Animals"> | string | null
     sex?: EnumSexsFilter<"Animals"> | $Enums.Sexs
     castred?: BoolFilter<"Animals"> | boolean
     weight?: DecimalFilter<"Animals"> | Decimal | DecimalJsLike | number | string
@@ -3532,7 +3532,7 @@ export namespace Prisma {
   export type AnimalsOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    photo?: SortOrder
+    photo?: SortOrderInput | SortOrder
     sex?: SortOrder
     castred?: SortOrder
     weight?: SortOrder
@@ -3552,7 +3552,7 @@ export namespace Prisma {
     OR?: AnimalsWhereInput[]
     NOT?: AnimalsWhereInput | AnimalsWhereInput[]
     name?: StringFilter<"Animals"> | string
-    photo?: StringFilter<"Animals"> | string
+    photo?: StringNullableFilter<"Animals"> | string | null
     sex?: EnumSexsFilter<"Animals"> | $Enums.Sexs
     castred?: BoolFilter<"Animals"> | boolean
     weight?: DecimalFilter<"Animals"> | Decimal | DecimalJsLike | number | string
@@ -3569,7 +3569,7 @@ export namespace Prisma {
   export type AnimalsOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    photo?: SortOrder
+    photo?: SortOrderInput | SortOrder
     sex?: SortOrder
     castred?: SortOrder
     weight?: SortOrder
@@ -3593,7 +3593,7 @@ export namespace Prisma {
     NOT?: AnimalsScalarWhereWithAggregatesInput | AnimalsScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Animals"> | string
     name?: StringWithAggregatesFilter<"Animals"> | string
-    photo?: StringWithAggregatesFilter<"Animals"> | string
+    photo?: StringNullableWithAggregatesFilter<"Animals"> | string | null
     sex?: EnumSexsWithAggregatesFilter<"Animals"> | $Enums.Sexs
     castred?: BoolWithAggregatesFilter<"Animals"> | boolean
     weight?: DecimalWithAggregatesFilter<"Animals"> | Decimal | DecimalJsLike | number | string
@@ -3669,7 +3669,7 @@ export namespace Prisma {
   export type AnimalsCreateInput = {
     id?: string
     name: string
-    photo: string
+    photo?: string | null
     sex: $Enums.Sexs
     castred: boolean
     weight: Decimal | DecimalJsLike | number | string
@@ -3685,7 +3685,7 @@ export namespace Prisma {
   export type AnimalsUncheckedCreateInput = {
     id?: string
     name: string
-    photo: string
+    photo?: string | null
     sex: $Enums.Sexs
     castred: boolean
     weight: Decimal | DecimalJsLike | number | string
@@ -3701,7 +3701,7 @@ export namespace Prisma {
   export type AnimalsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    photo?: StringFieldUpdateOperationsInput | string
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     sex?: EnumSexsFieldUpdateOperationsInput | $Enums.Sexs
     castred?: BoolFieldUpdateOperationsInput | boolean
     weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -3717,7 +3717,7 @@ export namespace Prisma {
   export type AnimalsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    photo?: StringFieldUpdateOperationsInput | string
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     sex?: EnumSexsFieldUpdateOperationsInput | $Enums.Sexs
     castred?: BoolFieldUpdateOperationsInput | boolean
     weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -3733,7 +3733,7 @@ export namespace Prisma {
   export type AnimalsCreateManyInput = {
     id?: string
     name: string
-    photo: string
+    photo?: string | null
     sex: $Enums.Sexs
     castred: boolean
     weight: Decimal | DecimalJsLike | number | string
@@ -3749,7 +3749,7 @@ export namespace Prisma {
   export type AnimalsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    photo?: StringFieldUpdateOperationsInput | string
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     sex?: EnumSexsFieldUpdateOperationsInput | $Enums.Sexs
     castred?: BoolFieldUpdateOperationsInput | boolean
     weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -3764,7 +3764,7 @@ export namespace Prisma {
   export type AnimalsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    photo?: StringFieldUpdateOperationsInput | string
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     sex?: EnumSexsFieldUpdateOperationsInput | $Enums.Sexs
     castred?: BoolFieldUpdateOperationsInput | boolean
     weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -3899,6 +3899,21 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type EnumSexsFilter<$PrismaModel = never> = {
     equals?: $Enums.Sexs | EnumSexsFieldRefInput<$PrismaModel>
     in?: $Enums.Sexs[] | ListEnumSexsFieldRefInput<$PrismaModel>
@@ -3993,6 +4008,24 @@ export namespace Prisma {
 
   export type AnimalsSumOrderByAggregateInput = {
     weight?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type EnumSexsWithAggregatesFilter<$PrismaModel = never> = {
@@ -4105,6 +4138,10 @@ export namespace Prisma {
     create?: XOR<CategoriesCreateWithoutAnimalsInput, CategoriesUncheckedCreateWithoutAnimalsInput>
     connectOrCreate?: CategoriesCreateOrConnectWithoutAnimalsInput
     connect?: CategoriesWhereUniqueInput
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type EnumSexsFieldUpdateOperationsInput = {
@@ -4242,6 +4279,20 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedEnumSexsFilter<$PrismaModel = never> = {
     equals?: $Enums.Sexs | EnumSexsFieldRefInput<$PrismaModel>
     in?: $Enums.Sexs[] | ListEnumSexsFieldRefInput<$PrismaModel>
@@ -4275,6 +4326,23 @@ export namespace Prisma {
   export type NestedBoolNullableFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumSexsWithAggregatesFilter<$PrismaModel = never> = {
@@ -4332,7 +4400,7 @@ export namespace Prisma {
   export type AnimalsCreateWithoutCategoryInput = {
     id?: string
     name: string
-    photo: string
+    photo?: string | null
     sex: $Enums.Sexs
     castred: boolean
     weight: Decimal | DecimalJsLike | number | string
@@ -4347,7 +4415,7 @@ export namespace Prisma {
   export type AnimalsUncheckedCreateWithoutCategoryInput = {
     id?: string
     name: string
-    photo: string
+    photo?: string | null
     sex: $Enums.Sexs
     castred: boolean
     weight: Decimal | DecimalJsLike | number | string
@@ -4391,7 +4459,7 @@ export namespace Prisma {
     NOT?: AnimalsScalarWhereInput | AnimalsScalarWhereInput[]
     id?: StringFilter<"Animals"> | string
     name?: StringFilter<"Animals"> | string
-    photo?: StringFilter<"Animals"> | string
+    photo?: StringNullableFilter<"Animals"> | string | null
     sex?: EnumSexsFilter<"Animals"> | $Enums.Sexs
     castred?: BoolFilter<"Animals"> | boolean
     weight?: DecimalFilter<"Animals"> | Decimal | DecimalJsLike | number | string
@@ -4455,7 +4523,7 @@ export namespace Prisma {
   export type AnimalsCreateManyCategoryInput = {
     id?: string
     name: string
-    photo: string
+    photo?: string | null
     sex: $Enums.Sexs
     castred: boolean
     weight: Decimal | DecimalJsLike | number | string
@@ -4470,7 +4538,7 @@ export namespace Prisma {
   export type AnimalsUpdateWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    photo?: StringFieldUpdateOperationsInput | string
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     sex?: EnumSexsFieldUpdateOperationsInput | $Enums.Sexs
     castred?: BoolFieldUpdateOperationsInput | boolean
     weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -4485,7 +4553,7 @@ export namespace Prisma {
   export type AnimalsUncheckedUpdateWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    photo?: StringFieldUpdateOperationsInput | string
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     sex?: EnumSexsFieldUpdateOperationsInput | $Enums.Sexs
     castred?: BoolFieldUpdateOperationsInput | boolean
     weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -4500,7 +4568,7 @@ export namespace Prisma {
   export type AnimalsUncheckedUpdateManyWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    photo?: StringFieldUpdateOperationsInput | string
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     sex?: EnumSexsFieldUpdateOperationsInput | $Enums.Sexs
     castred?: BoolFieldUpdateOperationsInput | boolean
     weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string

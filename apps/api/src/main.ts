@@ -1,7 +1,7 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app/app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -19,7 +19,9 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Adopte.me')
-    .setDescription('api for adopte.me, one app for adopte animals from IFMA Campus Caxias')
+    .setDescription(
+      'api for adopte.me, one app for adopte animals from IFMA Campus Caxias',
+    )
     .setVersion('1.0')
     .build();
 

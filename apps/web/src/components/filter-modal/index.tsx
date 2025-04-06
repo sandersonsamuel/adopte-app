@@ -7,13 +7,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import classNames from "classnames";
 import { SlidersHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Modal from "react-modal";
 import { Button } from "../ui/button";
 import { IconButton } from "../ui/icon-button";
 import { Input } from "../ui/input";
 import { Select } from "../ui/select";
+import { MODAL_STYLE } from "@/constants/modal-style.constants";
 type Props = {
   searchParams: URLSearchParams;
   categories: Category[];
@@ -52,10 +53,10 @@ export const FilterModal = ({ searchParams, categories }: Props) => {
   const { register, handleSubmit, reset } = useForm<AnimalsQueryParamsType>({
     resolver: zodResolver(animalsQuerySchema),
     defaultValues: {
-      sex: searchParams.get("sex") || "",
-      age: searchParams.get("age") || "",
-      category: searchParams.get("category") || "",
-      name: searchParams.get("name") || "",
+      sex: "",
+      age: "",
+      category: "",
+      name: "",
     },
   });
 
@@ -80,12 +81,28 @@ export const FilterModal = ({ searchParams, categories }: Props) => {
     reset();
   };
 
+  const handleClearFilters = () => {
+    const params = new URLSearchParams();
+    router.push(`?${params.toString()}`);
+    handleCloseModal();
+  };
+
+  useEffect(() => {
+    reset({
+      sex: searchParams.get("sex") || "",
+      age: searchParams.get("age") || "",
+      category: searchParams.get("category") || "",
+      name: searchParams.get("name") || "",
+    });
+  }, [searchParams, reset]);
+
   return (
     <>
       <IconButton
         onClick={() => setOpen(true)}
         className={classNames(
-          searchParams.size >= 1 && !searchParams.get("category")
+          (searchParams.size > 1 && searchParams.get("category")) ||
+            (searchParams.size == 1 && !searchParams.get("category"))
             ? "blue-gradient text-white shadow-xl"
             : ""
         )}
@@ -97,13 +114,9 @@ export const FilterModal = ({ searchParams, categories }: Props) => {
         isOpen={open}
         onRequestClose={handleCloseModal}
         ariaHideApp={false}
-        style={{
-          overlay: {
-            zIndex: 99999,
-          },
-        }}
+        style={MODAL_STYLE}
         className={
-          "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute bg-white border border-gray-300 rounded-3xl p-4 w-[80%] min-h-[40%]"
+          "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute bg-white border border-gray-300 rounded-3xl p-4 w-[85%] md:max-w-lg min-h-[40%]"
         }
       >
         <div className="flex flex-col gap-3">
@@ -132,9 +145,21 @@ export const FilterModal = ({ searchParams, categories }: Props) => {
 
             <Input label="Nome" {...register("name")} />
 
-            <Button className="mt-2" type="submit">
-              Filtrar
-            </Button>
+            <div>
+              <Button size="sm" className="mt-2" type="submit">
+                Filtrar
+              </Button>
+
+              <Button
+                variant="outline"
+                size="sm"
+                className="mt-2"
+                type="button"
+                onClick={handleClearFilters}
+              >
+                Limpar
+              </Button>
+            </div>
           </form>
         </div>
       </Modal>

@@ -1,6 +1,8 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AnimalsModule } from 'src/modules/animals/animals.module';
+import { AuthMiddleware } from 'src/modules/auth/auth.middleware';
+import { AuthModule } from 'src/modules/auth/auth.module';
 import { CategoriesModule } from 'src/modules/categories/categories.module';
 
 @Module({
@@ -8,12 +10,17 @@ import { CategoriesModule } from 'src/modules/categories/categories.module';
     ConfigModule.forRoot({
       isGlobal: true,
       expandVariables: true,
-      envFilePath: '../../.env'
+      envFilePath: '../../.env',
     }),
     CategoriesModule,
     AnimalsModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AuthMiddleware).forRoutes('*');
+  }
+}

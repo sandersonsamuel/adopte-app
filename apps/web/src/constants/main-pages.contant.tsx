@@ -5,15 +5,20 @@ export const MAIN_PAGES = [
     name: "Animais",
     href: "/animals",
     icon: <PawPrint />,
+    editPage: {
+      name: "Editar Animais",
+      href: "/edit/animal",
+      icon: <PawPrint />,
+    },
   },
   {
     name: "Categorias",
     href: "/categories",
     icon: <ListCollapse />,
-  },{
-    name: "Perfil",
-    href: "/profile",
-    icon: <User />,
+    editPage: {
+      name: "Editar Categorias",
+      href: "/edit/category",
+      icon: <PawPrint />,
+    },
   }
-];
-
+] as const;

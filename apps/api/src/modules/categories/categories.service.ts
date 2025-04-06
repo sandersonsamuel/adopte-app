@@ -11,12 +11,15 @@ export class CategoriesService {
     const categoryIsAlreadyExists = await this.prisma.categories.findUnique({
       where: {
         name: createCategoryDto.name,
-        deletedAt: null,
       },
     });
 
-    if (categoryIsAlreadyExists) {
+    if (categoryIsAlreadyExists && categoryIsAlreadyExists.deletedAt === null) {
       throw new HttpException('A Categoria já existe', 400);
+    }
+
+    if (categoryIsAlreadyExists && categoryIsAlreadyExists.deletedAt !== null) {
+      return this.restore(categoryIsAlreadyExists.id);
     }
 
     return this.prisma.categories.create({
@@ -32,15 +35,73 @@ export class CategoriesService {
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} category`;
+  async findOne(id: string) {
+    const category = await this.prisma.categories.findUnique({
+      where: {
+        id,
+        deletedAt: null,
+      },
+    });
+
+    if (!category) {
+      throw new HttpException('Categoria não encontrada', 404);
+    }
+
+    return category;
   }
 
-  update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+  async update(id: string, updateCategoryDto: UpdateCategoryDto) {
+    await this.findOne(id);
+
+    const categoryIsAlreadyExists = await this.prisma.categories.findUnique({
+      where: {
+        name: updateCategoryDto.name,
+        deletedAt: null,
+      },
+    });
+
+    if (categoryIsAlreadyExists) {
+      throw new HttpException('A Categoria já existe', 400);
+    }
+
+    return this.prisma.categories.update({
+      where: {
+        id,
+      },
+      data: updateCategoryDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} category`;
+  async restore(id: string) {
+    return this.prisma.categories.update({
+      where: {
+        id,
+      },
+      data: {
+        deletedAt: null,
+      },
+    });
+  }
+
+  async remove(id: string) {
+    await this.findOne(id);
+
+    await this.prisma.animals.updateMany({
+      where: {
+        categoryId: id,
+      },
+      data: {
+        deletedAt: new Date(),
+      },
+    });
+
+    return this.prisma.categories.update({
+      where: {
+        id,
+      },
+      data: {
+        deletedAt: new Date(),
+      },
+    });
   }
 }

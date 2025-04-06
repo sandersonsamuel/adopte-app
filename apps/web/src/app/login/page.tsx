@@ -36,7 +36,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 p-5 w-full">
       <HeaderIcons>
         <Link href={MAIN_PAGES[0].href}>
           <IconButton>

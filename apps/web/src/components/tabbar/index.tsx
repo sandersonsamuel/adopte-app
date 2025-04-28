@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { IconButton } from "../ui/icon-button";
 import classNames from "classnames";
 import { useState, useEffect } from "react";
+import { LogoutModal } from "../logout-modal";
 
 export function TabBar() {
   const pathname = usePathname();
@@ -20,7 +21,7 @@ export function TabBar() {
   }
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 max-w-3xl mx-auto">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 max-w-3xl mx-auto z-50">
       <div className="flex justify-around items-center">
         {MAIN_PAGES.map((page) => (
           <Link key={page.href} href={page.href}>
@@ -36,6 +37,7 @@ export function TabBar() {
             </IconButton>
           </Link>
         ))}
+        <LogoutModal />
       </div>
     </nav>
   );

@@ -7,7 +7,7 @@ import { Transform } from 'class-transformer';
 export class AnimalPaginateDto extends PaginationQueryDTO {
   @ApiProperty({
     description: 'The category to filter the animals',
-    example: 'dog',
+    example: 'cachorro',
     required: false,
   })
   @IsOptional()
@@ -25,7 +25,7 @@ export class AnimalPaginateDto extends PaginationQueryDTO {
 
   @ApiProperty({
     description: 'The name to filter the animals',
-    example: 'Rex',
+    example: 'Popo',
     required: false,
   })
   @IsOptional()

@@ -1,5 +1,6 @@
 import { fetchApi } from "@/lib/utils/fetch-api/server";
 
 export const getCategoriesQuery = async () => {
-  return fetchApi("/categories/all", "categories");
+  const data = await fetchApi("/categories/all", "categories");
+  return data || [];
 };

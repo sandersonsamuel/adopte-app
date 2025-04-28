@@ -28,29 +28,12 @@ export class AnimalsService {
     age,
     adopted,
   }: AnimalPaginateDto) {
-    if (category) {
-      return this.prismaService.animals.findMany({
-        where: {
-          category: {
-            name: category,
-            deletedAt: null,
-          },
-          deletedAt: null,
-          adopted: !!adopted,
-          sex,
-          name: {
-            contains: name,
-            mode: 'insensitive',
-          },
-          age,
-        },
-        skip: (page - 1) * pageSize,
-        take: pageSize,
-      });
-    }
-
-    return this.prismaService.animals.findMany({
+    const data = await this.prismaService.animals.findMany({
       where: {
+        category: {
+          name: category || undefined,
+          deletedAt: null,
+        },
         deletedAt: null,
         adopted: !!adopted,
         sex,
@@ -63,6 +46,30 @@ export class AnimalsService {
       skip: (page - 1) * pageSize,
       take: pageSize,
     });
+
+    return {
+      data,
+      pagination: {
+        current: page,
+        limit: pageSize,
+        total: await this.prismaService.animals.count({
+          where: {
+            category: {
+              name: category || undefined,
+              deletedAt: null,
+            },
+            deletedAt: null,
+            adopted: !!adopted,
+            sex,
+            name: {
+              contains: name,
+              mode: 'insensitive',
+            },
+            age,
+          },
+        }),
+      },
+    };
   }
 
   async findOne(id: string) {

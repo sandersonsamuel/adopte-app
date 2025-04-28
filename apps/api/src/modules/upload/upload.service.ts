@@ -72,7 +72,6 @@ export class UploadService {
     let quality = 90;
     let compressedBuffer = buffer;
 
-    // define a compressao com base no tipo de imagem
     const formatOptions = {
       'image/jpeg': (img: sharp.Sharp) => img.jpeg({ quality }),
       'image/png': (img: sharp.Sharp) =>

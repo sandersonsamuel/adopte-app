@@ -21,7 +21,7 @@ export const AdoptedAnimalsCarousel = ({ adoptedAnimals }: Props) => {
       className="w-full"
       modules={[Autoplay]}
       autoplay={{ delay: 1000, disableOnInteraction: false }}
-      slidesPerView={2}
+      slidesPerView={3}
       loop={true}
       spaceBetween={10}
       breakpoints={{
@@ -43,7 +43,6 @@ export const AdoptedAnimalsCarousel = ({ adoptedAnimals }: Props) => {
         >
           <div className="flex justify-center items-center w-full">
             <IconButton className="flex items-center gap-2 px-3">
-              <PawPrint size={20} />
               <span className="text-center">{animal.name}</span>
             </IconButton>
           </div>

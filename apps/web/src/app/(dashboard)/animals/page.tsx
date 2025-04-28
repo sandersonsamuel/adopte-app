@@ -7,7 +7,11 @@ import Link from "next/link";
 
 export default async function Animals() {
   const categories = await getCategoriesQuery();
-  const animals = await getAnimalsQuery();
+  const res = await getAnimalsQuery();
+
+  if (!res) return;
+
+  const { data: animals, pagination } = res;
 
   if (animals && animals.length > 0 && categories.length > 0) {
     return (

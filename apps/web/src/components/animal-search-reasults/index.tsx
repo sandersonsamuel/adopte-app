@@ -8,7 +8,11 @@ type Props = {
 };
 
 export const AnimalSearchResults = async ({ params }: Props) => {
-  const animals = await getAnimalsQuery(params);
+  const res = await getAnimalsQuery(params);
+
+  if (!res) return;
+
+  const { data: animals, pagination } = res;
 
   if (animals && animals.length > 0) {
     return (

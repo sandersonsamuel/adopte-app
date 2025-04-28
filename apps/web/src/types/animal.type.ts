@@ -14,6 +14,15 @@ export interface AnimalType {
   updatedAt: Date;
 }
 
+export interface AnimalPaginteType {
+  data: AnimalType[];
+  pagination: {
+    total: number;
+    current: number;
+    limit: number;
+  };
+}
+
 export type UpdateAnimalType = Partial<AnimalType>;
 
 export enum Sex {

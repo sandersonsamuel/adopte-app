@@ -1,8 +1,10 @@
 import { api } from "@/lib/utils/axios/server";
-import { AnimalType } from "@/types/animal.type";
+import { AnimalPaginteType } from "@/types/animal.type";
 import { AnimalsQueryParamsType } from "@/types/animals-query-params-type";
 
-export const getAnimalsQuery = async (params?: AnimalsQueryParamsType) => {
+export const getAnimalsQuery = async (
+  params?: AnimalsQueryParamsType
+): Promise<AnimalPaginteType | undefined> => {
   const searchParams = new URLSearchParams();
 
   if (params) {
@@ -14,12 +16,11 @@ export const getAnimalsQuery = async (params?: AnimalsQueryParamsType) => {
   }
 
   try {
-    const { data } = await api.get<AnimalType[]>(
+    const { data } = await api.get<AnimalPaginteType>(
       `/animals/paginate?${searchParams.toString()}`
     );
     return data;
   } catch (error) {
     console.log("Error fetching animals", error);
-    return []
   }
 };

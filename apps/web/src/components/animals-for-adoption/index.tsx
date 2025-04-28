@@ -7,7 +7,11 @@ type Props = {
 };
 
 export const AnimalsForAdoption = async ({ params }: Props) => {
-  const animals = await getAnimalsQuery(params);
+  const res = await getAnimalsQuery(params);
+
+  if (!res) return;
+
+  const { data: animals, pagination } = res;
 
   return (
     <div className="flex flex-col gap-3">

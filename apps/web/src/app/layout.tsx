@@ -1,9 +1,8 @@
+import { QueryProvider } from "@/components/query-provider";
 import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
-import "./globals.css";
 import { Toaster } from "react-hot-toast";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { QueryProvider } from "@/components/query-provider";
+import "./globals.css";
 
 const lexend = Lexend({
   variable: "--font-geist-sans",

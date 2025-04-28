@@ -73,7 +73,7 @@ export const FilterModal = ({ searchParams, categories }: Props) => {
       data.category !== undefined &&
       params.set("category", data.category);
     handleCloseModal();
-    router.push(`?${params.toString()}`);
+    router.push(`/search?${params.toString()}`);
   };
 
   const handleCloseModal = () => {

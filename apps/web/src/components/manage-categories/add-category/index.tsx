@@ -9,7 +9,7 @@ import { createCategorySchema } from "@/schemas/create-category.schema";
 import { useMutation } from "@tanstack/react-query";
 import { createCategoryMutation } from "@/api/mutations/create-category.mutation";
 import toast from "react-hot-toast";
-import { revalidate } from "@/actions/revalidate";
+import { revalidate } from "@/actions/revalidate.action";
 
 export const AddCategory = () => {
   const {

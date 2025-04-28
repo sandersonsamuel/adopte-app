@@ -58,8 +58,8 @@ export class CategoriesService {
         name: updateCategoryDto.name,
         deletedAt: null,
       },
-    });
-
+    })
+    
     if (categoryIsAlreadyExists) {
       throw new HttpException('A Categoria já existe', 400);
     }

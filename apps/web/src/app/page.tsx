@@ -11,6 +11,7 @@ import { createClientServer } from "@/lib/utils/supabase/server";
 import { AnimalsQueryParamsType } from "@/types/animals-query-params-type";
 import { LayoutDashboard, LogIn } from "lucide-react";
 import Link from "next/link";
+import { SocialMedia } from "@/components/social-media";
 
 export default async function Home({
   searchParams,
@@ -28,7 +29,7 @@ export default async function Home({
 
   if (categories) {
     return (
-      <div className="flex flex-col gap-5 p-5 w-full">
+      <div className="flex flex-col gap-3 p-5 w-full">
         <HeaderIcons>
           <SearchInput />
           <Link href={user ? MAIN_PAGES[0].href : "/login"}>
@@ -39,6 +40,7 @@ export default async function Home({
         {categories && <CategoryFilter categories={categories} />}
         <AnimalsForAdoption params={params} />
         <AdoptedAnimals />
+        <SocialMedia />
       </div>
     );
   }

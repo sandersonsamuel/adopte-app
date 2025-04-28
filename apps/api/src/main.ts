@@ -20,13 +20,13 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Adopte.me')
     .setDescription(
-      'api for adopte.me, one app for adopte animals from IFMA Campus Caxias',
+      'api for adopte.me, one app for adopte animals.',
     )
     .setVersion('1.0')
     .build();
 
   const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('docs', app, documentFactory);
+  SwaggerModule.setup('api/docs', app, documentFactory);
   await app.listen(process.env.PORT ?? 5400);
 }
 bootstrap();

@@ -29,7 +29,7 @@ export default function Login() {
   const onSubmit = async (data: LoginFormData) => {
     const res = await signIn(data.email, data.password);
     res.error && toast.error(res.error.message);
-    if (res.data) {
+    if (res.data && !res.error) {
       toast.success("Login realizado com sucesso");
       router.push("/animals");
     }

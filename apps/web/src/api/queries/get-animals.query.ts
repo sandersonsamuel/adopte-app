@@ -20,5 +20,6 @@ export const getAnimalsQuery = async (params?: AnimalsQueryParamsType) => {
     return data;
   } catch (error) {
     console.log("Error fetching animals", error);
+    return []
   }
 };

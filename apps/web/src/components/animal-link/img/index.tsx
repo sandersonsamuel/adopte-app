@@ -20,7 +20,9 @@ export const AnimalImg = ({ animal, redirectToEdit = true }: Props) => {
         <Image
           priority
           src={`${animal.photo}?t=${animal.updatedAt}`}
-          alt={animal.name}
+          alt={`Foto de uma animal chamado ${animal.name}, do sexo ${
+            animal.sex == "MALE" ? "macho" : "fêmea"
+          }`}
           width={150}
           height={197}
           className={`w-[150px] h-[197.33px] rounded-3xl border-4 ${
@@ -37,9 +39,10 @@ export const AnimalImg = ({ animal, redirectToEdit = true }: Props) => {
             {AnimalAgeTranslation[animal.age]}
           </p>
         </div>
+
         {user && redirectToEdit && (
           <div className="absolute left-3 top-3">
-            <IconButton className="rounded-lg shadow-md" size="small">
+            <IconButton className="rounded-lg shadow-md" size="sm">
               <Bolt size={20} />
             </IconButton>
           </div>

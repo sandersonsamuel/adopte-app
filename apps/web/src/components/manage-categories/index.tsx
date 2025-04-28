@@ -18,7 +18,7 @@ import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 import { updateCategoryMutation } from "@/api/mutations/update-category.mutation";
 import { deleteCategoryMutation } from "@/api/mutations/delete-category.mutation";
-import { revalidate } from "@/actions/revalidate";
+import { revalidate } from "@/actions/revalidate.action";
 
 type Props = {
   categories: Category[];
@@ -108,26 +108,29 @@ export const ManageCategories = ({ categories }: Props) => {
           }
         >
           <div className="flex flex-col gap-3">
+            <h2 className="text-lg font-bold">Editar Categoria</h2>
             <Input
               label="Nome"
               {...register("name")}
               error={errors.name?.message}
             />
 
-            <Button
-              size="sm"
-              variant="default"
-              onClick={() => onSubmit("edit")}
-            >
-              Confirmar Atualização
-            </Button>
-            <Button
-              size="sm"
-              variant="destructive"
-              onClick={() => setIsOpenDelete(true)}
-            >
-              Deletar
-            </Button>
+            <div className="flex flex-col gap-1">
+              <Button
+                size="sm"
+                variant="default"
+                onClick={() => onSubmit("edit")}
+              >
+                Confirmar Atualização
+              </Button>
+              <Button
+                size="sm"
+                variant="destructive"
+                onClick={() => setIsOpenDelete(true)}
+              >
+                Deletar
+              </Button>
+            </div>
           </div>
         </Modal>
 

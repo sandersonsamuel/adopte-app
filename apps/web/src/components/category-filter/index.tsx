@@ -29,7 +29,7 @@ export const CategoryFilter = ({ categories }: Props) => {
     <div className="flex flex-col gap-3">
       <h3 className="font-medium">Tipos de pet</h3>
       <div className="flex gap-3">
-        <FilterModal searchParams={searchParams} categories={categories} />
+        <FilterModal redirectToSearch searchParams={searchParams} categories={categories} />
         {categories.map((item) => (
           <IconButton
             key={item.id}

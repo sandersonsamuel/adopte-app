@@ -1,22 +1,39 @@
 "use client";
 
+import { signIn } from "@/actions/auth.action";
+import { BackPage } from "@/components/back-page";
 import { HeaderIcons } from "@/components/header-icons";
 import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
 import { Input } from "@/components/ui/input";
-import { Home } from "lucide-react";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginFormData } from "@/types/login-form-data.types";
-import { loginSchema } from "@/schemas/login.schema";
-import { signIn } from "@/actions/auth.action";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
 import { MAIN_PAGES } from "@/constants/main-pages.contant";
-import { BackPage } from "@/components/back-page";
+import { createClient } from "@/lib/utils/supabase/client";
+import { loginSchema } from "@/schemas/login.schema";
+import { LoginFormData } from "@/types/login-form-data.types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { redirect, useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import Link from "next/link";
+import toast from "react-hot-toast";
 
 export default function Login() {
+  const supabase = createClient();
+
+  const isLogged = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (user) {
+      redirect("/");
+    }
+  };
+
+  useEffect(() => {
+    isLogged();
+  }, []);
+
   const router = useRouter();
 
   const {

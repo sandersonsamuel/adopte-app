@@ -11,7 +11,7 @@ export const AnimalsForAdoption = async ({ params }: Props) => {
 
   if (!res) return;
 
-  const { data: animals, pagination } = res;
+  const { data: animals } = res;
 
   return (
     <div className="flex flex-col gap-3">

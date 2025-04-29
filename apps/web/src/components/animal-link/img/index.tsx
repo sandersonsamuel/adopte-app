@@ -1,9 +1,6 @@
 "use client";
 
-import { IconButton } from "@/components/ui/icon-button";
-import { useAuth } from "@/contexts/auth-context";
 import { AnimalAgeTranslation, AnimalType } from "@/types/animal.type";
-import { Bolt } from "lucide-react";
 import Image from "next/image";
 
 type Props = {
@@ -11,9 +8,7 @@ type Props = {
   redirectToEdit?: boolean;
 };
 
-export const AnimalImg = ({ animal, redirectToEdit = true }: Props) => {
-  const { user } = useAuth();
-
+export const AnimalImg = ({ animal }: Props) => {
   if (animal) {
     return (
       <div className="relative flex flex-col items-center justify-center">
@@ -39,14 +34,6 @@ export const AnimalImg = ({ animal, redirectToEdit = true }: Props) => {
             {AnimalAgeTranslation[animal.age]}
           </p>
         </div>
-
-        {user && redirectToEdit && (
-          <div className="absolute left-3 top-3">
-            <IconButton className="rounded-lg shadow-md" size="sm">
-              <Bolt size={20} />
-            </IconButton>
-          </div>
-        )}
       </div>
     );
   }

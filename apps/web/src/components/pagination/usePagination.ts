@@ -9,7 +9,7 @@ const generatePages = (page: number, totalPages: number) => {
 
   const R = "...";
 
-  const showPages = 7;
+  const showPages = 6;
 
   if (total <= showPages) {
     //retorna um array com total elementos, cada elemento é o índice + 1, pois o índice começa em 0

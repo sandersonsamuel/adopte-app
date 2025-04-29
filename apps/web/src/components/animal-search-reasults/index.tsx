@@ -18,7 +18,7 @@ export const AnimalSearchResults = async ({ params }: Props) => {
   if (animals && animals.length > 0) {
     return (
       <>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-4 min-h-[410px]">
           {animals.map((animal) => (
             <Link href={`/animal/${animal.id}`} key={animal.id}>
               <AnimalImg animal={animal} />

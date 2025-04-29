@@ -1,7 +1,11 @@
 import { getAdoptedAnimalsQuery } from "@/api/queries/get-adopted-animals.query";
 import { AdoptedAnimalsCarousel } from "./slide";
 export const AdoptedAnimals = async () => {
-  const adoptedAnimals = await getAdoptedAnimalsQuery();
+  const res = await getAdoptedAnimalsQuery();
+
+  if (!res) return;
+
+  const { data: adoptedAnimals, pagination } = res;
 
   if (adoptedAnimals) {
     return (

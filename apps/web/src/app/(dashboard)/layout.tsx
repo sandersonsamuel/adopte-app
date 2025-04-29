@@ -1,6 +1,6 @@
 import { AuthProvider } from "@/components/auth-providers";
+import { BackPage } from "@/components/back-page";
 import { HeaderIcons } from "@/components/header-icons";
-import { Home } from "lucide-react";
 import { IconButton } from "@/components/ui/icon-button";
 import Link from "next/link";
 
@@ -15,7 +15,7 @@ export default function DashboardLayout({
         <HeaderIcons>
           <Link href="/">
             <IconButton>
-              <Home />
+              <BackPage />
             </IconButton>
           </Link>
         </HeaderIcons>

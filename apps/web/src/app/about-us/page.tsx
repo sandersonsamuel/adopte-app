@@ -1,17 +1,14 @@
-import { Home } from "lucide-react";
-import { IconButton } from "@/components/ui/icon-button";
+import { BackPage } from "@/components/back-page";
 import { HeaderIcons } from "@/components/header-icons";
-import Link from "next/link";
+import { IconButton } from "@/components/ui/icon-button";
 
 export default function AboutUs() {
   return (
     <div className="p-5 w-full">
       <HeaderIcons>
-        <Link href="/">
-          <IconButton>
-            <Home />
-          </IconButton>
-        </Link>
+        <IconButton>
+          <BackPage />
+        </IconButton>
       </HeaderIcons>
     </div>
   );

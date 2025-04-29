@@ -14,6 +14,7 @@ import { signIn } from "@/actions/auth.action";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { MAIN_PAGES } from "@/constants/main-pages.contant";
+import { BackPage } from "@/components/back-page";
 
 export default function Login() {
   const router = useRouter();
@@ -40,7 +41,7 @@ export default function Login() {
       <HeaderIcons>
         <Link href={MAIN_PAGES[0].href}>
           <IconButton>
-            <Home />
+            <BackPage />
           </IconButton>
         </Link>
       </HeaderIcons>

@@ -18,7 +18,7 @@ export class PaginationQueryDTO {
   page: number;
 
   @ApiProperty({
-    default: 10,
+    default: 12,
     minimum: 1,
     required: false
   })

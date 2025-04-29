@@ -8,6 +8,7 @@ import Link from "next/link";
 import { CategoryFilter } from "@/components/category-filter";
 import { getCategoriesQuery } from "@/api/queries/get-categories.query";
 import { AnimalSearchResults } from "@/components/animal-search-reasults";
+import { BackPage } from "@/components/back-page";
 
 const SearchPage = async ({
   searchParams,
@@ -18,12 +19,12 @@ const SearchPage = async ({
   const categories = await getCategoriesQuery();
 
   return (
-    <div className="flex flex-col gap-5 p-5 w-full">
+    <div className="flex flex-col gap-3 p-5 w-full">
       <HeaderIcons>
         <SearchInput />
         <Link href="/">
           <IconButton>
-            <Home />
+            <BackPage />
           </IconButton>
         </Link>
       </HeaderIcons>

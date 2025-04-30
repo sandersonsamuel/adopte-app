@@ -92,6 +92,14 @@ const AnimalPage = async ({ params }: { params: Promise<{ id: string }> }) => {
           </p>
         </div>
 
+        <div className="mt-3 flex flex-col gap-2">
+          <p className="font-bold">Obs:</p>
+          <p className="text-sm text-gray-800">
+            A idade indicada é uma estimativa e pode variar de acordo com a
+            espécie do animal.
+          </p>
+        </div>
+
         <Button className="w-full mt-3">Entrar em contato pelo Whatsapp</Button>
       </div>
     </div>

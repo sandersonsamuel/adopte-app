@@ -37,7 +37,9 @@ export default async function Home({
           </Link>
         </HeaderIcons>
         <AdoptionProcessInfo />
-        {categories && <CategoryFilter categories={categories} />}
+        {categories && (
+          <CategoryFilter redirectTo="/search" categories={categories} />
+        )}
         <AnimalsForAdoption params={params} />
         <AdoptedAnimals />
         <SocialMedia />

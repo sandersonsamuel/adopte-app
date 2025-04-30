@@ -15,12 +15,10 @@ export const AnimalImg = ({ animal }: Props) => {
         <Image
           priority
           src={`${animal.photo}?t=${animal.updatedAt}`}
-          alt={`Foto de uma animal chamado ${animal.name}, do sexo ${
-            animal.sex == "MALE" ? "macho" : "fêmea"
-          }`}
+          alt={`animal chamado ${animal.name}. ${animal.description}`}
           width={150}
           height={197}
-          className={`w-[150px] h-[197.33px] rounded-3xl border-4 ${
+          className={`w-[150px] h-[197.33px] object-cover rounded-3xl border-4 ${
             animal.sex === "MALE" ? "border-blue-300" : "border-pink-300"
           }`}
         />

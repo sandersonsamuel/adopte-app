@@ -18,13 +18,13 @@ import { MODAL_STYLE } from "@/constants/modal-style.constants";
 type Props = {
   searchParams: URLSearchParams;
   categories: Category[];
-  redirectToSearch?: boolean;
+  redirectTo?: string;
 };
 
 export const FilterModal = ({
   searchParams,
   categories,
-  redirectToSearch = false,
+  redirectTo,
 }: Props) => {
   const [open, setOpen] = useState(false);
 
@@ -79,8 +79,8 @@ export const FilterModal = ({
       params.set("category", data.category);
     handleCloseModal();
     router.push(
-      redirectToSearch
-        ? `/search?${params.toString()}`
+      redirectTo
+        ? `${redirectTo}?${params.toString()}`
         : `?${params.toString()}`
     );
   };

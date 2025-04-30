@@ -11,12 +11,14 @@ export const AnimalsForAdoption = async ({ params }: Props) => {
 
   if (!res) return;
 
-  const { data: animals, pagination } = res;
+  const { data: animals } = res;
 
   return (
     <div className="flex flex-col gap-3">
-      <h3>Para adoção</h3>
-      {animals && animals.length > 0 ? (
+      <div className="flex items-center gap-2">
+        <h3>Para adoção</h3>
+      </div>
+      {animals.length > 0 ? (
         <AnimalCarousel animals={animals} />
       ) : (
         <p className="min-h-[200px]">

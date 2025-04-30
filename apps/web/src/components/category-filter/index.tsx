@@ -7,9 +7,10 @@ import { IconButton } from "../ui/icon-button";
 
 type Props = {
   categories: Category[];
+  redirectTo?: string;
 };
 
-export const CategoryFilter = ({ categories }: Props) => {
+export const CategoryFilter = ({ categories, redirectTo }: Props) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -29,7 +30,11 @@ export const CategoryFilter = ({ categories }: Props) => {
     <div className="flex flex-col gap-3">
       <h3 className="font-medium">Tipos de pet</h3>
       <div className="flex gap-3">
-        <FilterModal searchParams={searchParams} categories={categories} />
+        <FilterModal
+          redirectTo={redirectTo}
+          searchParams={searchParams}
+          categories={categories}
+        />
         {categories.map((item) => (
           <IconButton
             key={item.id}

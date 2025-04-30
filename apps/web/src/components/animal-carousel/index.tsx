@@ -17,6 +17,7 @@ type Props = {
 export const AnimalCarousel = ({ animals }: Props) => {
   return (
     <Swiper
+      title="clique para ver mais detalhes do animal"
       className="w-full"
       modules={[Autoplay]}
       autoplay={{ delay: 2500, disableOnInteraction: false }}

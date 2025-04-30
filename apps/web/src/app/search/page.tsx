@@ -1,14 +1,12 @@
-import { HeaderIcons } from "@/components/header-icons";
-import { AnimalsForAdoption } from "@/components/animals-for-adoption";
-import { SearchInput } from "@/components/search-input";
-import { IconButton } from "@/components/ui/icon-button";
-import { Home } from "lucide-react";
-import { AnimalsQueryParamsType } from "@/types/animals-query-params-type";
-import Link from "next/link";
-import { CategoryFilter } from "@/components/category-filter";
 import { getCategoriesQuery } from "@/api/queries/get-categories.query";
 import { AnimalSearchResults } from "@/components/animal-search-reasults";
 import { BackPage } from "@/components/back-page";
+import { CategoryFilter } from "@/components/category-filter";
+import { HeaderIcons } from "@/components/header-icons";
+import { SearchInput } from "@/components/search-input";
+import { IconButton } from "@/components/ui/icon-button";
+import { AnimalsQueryParamsType } from "@/types/animals-query-params-type";
+import Link from "next/link";
 
 const SearchPage = async ({
   searchParams,

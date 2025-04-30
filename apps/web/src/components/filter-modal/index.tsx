@@ -18,9 +18,14 @@ import { MODAL_STYLE } from "@/constants/modal-style.constants";
 type Props = {
   searchParams: URLSearchParams;
   categories: Category[];
+  redirectTo?: string;
 };
 
-export const FilterModal = ({ searchParams, categories }: Props) => {
+export const FilterModal = ({
+  searchParams,
+  categories,
+  redirectTo,
+}: Props) => {
   const [open, setOpen] = useState(false);
 
   const sexSelect = [
@@ -73,7 +78,11 @@ export const FilterModal = ({ searchParams, categories }: Props) => {
       data.category !== undefined &&
       params.set("category", data.category);
     handleCloseModal();
-    router.push(`/search?${params.toString()}`);
+    router.push(
+      redirectTo
+        ? `${redirectTo}?${params.toString()}`
+        : `?${params.toString()}`
+    );
   };
 
   const handleCloseModal = () => {

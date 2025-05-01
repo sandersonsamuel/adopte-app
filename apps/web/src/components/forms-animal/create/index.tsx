@@ -112,6 +112,8 @@ export function FormCreateAnimal({ categories }: Props) {
         type="number"
         {...register("weight", { valueAsNumber: true })}
         placeholder="Peso do animal"
+        min={0}
+        step={0.1}
         error={errors?.weight?.message}
       />
 

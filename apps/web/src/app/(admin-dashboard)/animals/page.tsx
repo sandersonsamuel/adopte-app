@@ -31,7 +31,7 @@ export default async function Animals({ searchParams }: Props) {
         <h3>
           Clique em um animal para gerenciar suas informações e status de adoção
         </h3>
-        <AnimalSearchResults params={params} />
+        <AnimalSearchResults params={params} linkTo="/edit/animal" />
       </div>
     );
   }

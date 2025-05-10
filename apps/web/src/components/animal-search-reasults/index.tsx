@@ -6,9 +6,10 @@ import { Pagination } from "../pagination";
 
 type Props = {
   params: AnimalsQueryParamsType;
+  linkTo?: string;
 };
 
-export const AnimalSearchResults = async ({ params }: Props) => {
+export const AnimalSearchResults = async ({ params, linkTo }: Props) => {
   const res = await getAnimalsQuery(params);
 
   if (!res) return;
@@ -20,7 +21,10 @@ export const AnimalSearchResults = async ({ params }: Props) => {
       <>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-4 min-h-[410px]">
           {animals.map((animal) => (
-            <Link href={`/animal/${animal.id}`} key={animal.id}>
+            <Link
+              href={linkTo ? `${linkTo}/${animal.id}` : `/animals/${animal.id}`}
+              key={animal.id}
+            >
               <AnimalImg animal={animal} />
             </Link>
           ))}

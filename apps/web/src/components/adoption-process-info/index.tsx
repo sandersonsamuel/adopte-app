@@ -11,7 +11,7 @@ export const AdoptionProcessInfo = () => {
           </div>
           <Image
             src="/images/gatinho_notebook.gif"
-            alt="dog"
+            alt="gatinho ultilizando um notebook"
             width={1000}
             height={1000}
             className="w-[100px]"

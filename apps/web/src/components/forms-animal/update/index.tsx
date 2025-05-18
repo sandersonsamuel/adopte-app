@@ -49,7 +49,6 @@ export function FormUpdateAnimal({ categories, animal }: Props) {
   });
 
   const onSubmit = (data: UpdateAnimalFormData) => {
-    console.log(data);
     mutation.mutate({ animal: data, id: animal.id });
   };
 

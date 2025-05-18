@@ -39,8 +39,7 @@ export const CategoryFilter = ({ categories, redirectTo }: Props) => {
           <IconButton
             key={item.id}
             className={`p-3 capitalize ${
-              searchParams.get("category") === item.name &&
-              searchParams.size === 1
+              searchParams.get("category") === item.name
                 ? "blue-gradient text-white shadow-xl"
                 : ""
             }`}
